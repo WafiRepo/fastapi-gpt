@@ -1,6 +1,10 @@
 .env
-__pychace__/
+__pycache__/
 *.pyc
-.log
 venv/
 env/
+.vscode/
+.idea/
+*.tmp
+lib/
+*.dylib
