@@ -4,13 +4,3 @@ __pychace__/
 .log
 venv/
 env/
-.vscode/
-.idea/
-*.tmp
-
-*.dylib
-*.so
-*.dll
-
-# Tambahkan baris-baris ini ke .gitignore Anda
-lib/
