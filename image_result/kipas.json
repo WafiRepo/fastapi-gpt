@@ -1,0 +1,9 @@
+{
+    "label": "electric_fan",
+    "confidence": 89.36128997802734,
+    "center": {
+        "x": 418,
+        "y": 249
+    },
+    "radius": 240
+}

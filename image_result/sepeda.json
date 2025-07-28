@@ -1,0 +1,9 @@
+{
+    "label": "magnetic_compass",
+    "confidence": 29.620800018310547,
+    "center": {
+        "x": 612,
+        "y": 258
+    },
+    "radius": 147
+}
