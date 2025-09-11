@@ -1,0 +1,9 @@
+{
+    "label": "tricycle",
+    "confidence": 32.55027389526367,
+    "center": {
+        "x": 646,
+        "y": 351
+    },
+    "radius": 163
+}
