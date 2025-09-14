@@ -8,3 +8,4 @@ env/
 *.tmp
 lib/
 *.dylib
+*.sh
