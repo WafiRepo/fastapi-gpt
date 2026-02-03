@@ -16,11 +16,6 @@ import matplotlib
 matplotlib.use('Agg')  # Headless backend for plotting
 import matplotlib.pyplot as plt
 from PyPDF2 import PdfReader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
-from langchain.chains import RetrievalQA
-from langchain_community.chat_models import ChatOpenAI
 
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
@@ -40,7 +35,14 @@ routes_easy = APIRouter()
 # --------------------------------------------------------
 # Load env, init GPT
 # --------------------------------------------------------
-load_dotenv()
+# Load .env from the same directory as this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(script_dir, '.env')
+if os.path.exists(env_path):
+    load_dotenv(dotenv_path=env_path)
+else:
+    # Fallback: try current directory
+    load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 
@@ -88,38 +90,7 @@ def load_pdf_content(pdf_path: str) -> str:
         logger.error(f"Error loading PDF: {e}")
         return ""
 
-def create_vector_store(text: str) -> FAISS:
-    """Create vector store from text content."""
-    try:
-        # Split text into chunks
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000,
-            chunk_overlap=200,
-            length_function=len
-        )
-        chunks = text_splitter.split_text(text)
-        
-        # Create embeddings and vector store
-        embeddings = OpenAIEmbeddings()
-        vector_store = FAISS.from_texts(chunks, embeddings)
-        return vector_store
-    except Exception as e:
-        logger.error(f"Error creating vector store: {e}")
-        return None
-
-def get_relevant_context(query: str, vector_store: FAISS) -> str:
-    """Retrieve relevant context from vector store."""
-    try:
-        docs = vector_store.similarity_search(query, k=3)
-        return "\n".join([doc.page_content for doc in docs])
-    except Exception as e:
-        logger.error(f"Error retrieving context: {e}")
-        return ""
-
-# Initialize RAG components
-pdf_path = "docs/easy.pdf"
-pdf_content = load_pdf_content(pdf_path)
-vector_store = create_vector_store(pdf_content)
+# Langchain RAG components removed - not actively used
 
 # --------------------------------------------------------
 # GPT Table Interpretation

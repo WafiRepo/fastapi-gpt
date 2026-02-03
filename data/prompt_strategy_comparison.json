@@ -1,0 +1,42 @@
+{
+  "zero_shot": {
+    "bleu1_mean": 64.70817385756617,
+    "bleu4_mean": 22.65738735171275,
+    "rouge1_mean": 0.5759899867389505,
+    "rouge2_mean": 0.3419301350552979,
+    "rougeL_mean": 0.5259722790038515,
+    "bertscore_f1_mean": 0.9409565925598145,
+    "geval_overall_mean": 4.43,
+    "count": 20
+  },
+  "few_shot": {
+    "bleu1_mean": 63.359954831941934,
+    "bleu4_mean": 28.76670375912014,
+    "rouge1_mean": 0.5700222940099751,
+    "rouge2_mean": 0.37189468900188216,
+    "rougeL_mean": 0.5191990816419232,
+    "bertscore_f1_mean": 0.9293054074048996,
+    "geval_overall_mean": 4.15,
+    "count": 20
+  },
+  "cot": {
+    "bleu1_mean": 63.96578149534658,
+    "bleu4_mean": 19.201717248129512,
+    "rouge1_mean": 0.556636271462171,
+    "rouge2_mean": 0.3315929962454899,
+    "rougeL_mean": 0.503833134346374,
+    "bertscore_f1_mean": 0.9369928777217865,
+    "geval_overall_mean": 4.39,
+    "count": 20
+  },
+  "draft_critique_revise": {
+    "bleu1_mean": 64.64633246578873,
+    "bleu4_mean": 23.432065532553153,
+    "rouge1_mean": 0.5506448551787739,
+    "rouge2_mean": 0.34645409046224723,
+    "rougeL_mean": 0.5217355325975703,
+    "bertscore_f1_mean": 0.9352888017892838,
+    "geval_overall_mean": 4.29,
+    "count": 20
+  }
+}

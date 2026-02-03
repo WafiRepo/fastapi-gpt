@@ -11,7 +11,7 @@ import os
 from dotenv import load_dotenv
 import mysql.connector
 from mysql.connector import Error
-from google.cloud import firestore
+# from google.cloud import firestore  # Not actively used - commented out
 import requests
 from pydantic import BaseModel
 from datetime import datetime
@@ -22,7 +22,14 @@ logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %
 logger = logging.getLogger(__name__)
 
 # Load environment variables and OpenAI API key
-load_dotenv()
+# Load .env from the same directory as this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(script_dir, '.env')
+if os.path.exists(env_path):
+    load_dotenv(dotenv_path=env_path)
+else:
+    # Fallback: try current directory
+    load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
     raise ValueError("OPENAI_API_KEY is not set")
@@ -36,10 +43,10 @@ router_process_image = APIRouter()
 def get_db_connection():
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",
-            user="fastapi_user",
-            password="SecurePass123!",
-            database="sensor_data"
+            host=os.getenv("DB_HOST", "127.0.0.1"),
+            user=os.getenv("DB_USER", "root"),
+            password=os.getenv("DB_PASSWORD", ""),
+            database=os.getenv("DB_NAME", "sensor_data")
         )
         return connection
     except Error as e:
@@ -192,15 +199,16 @@ def get_processed_image_path_from_firestore(user_id):
     return f"image_result/{user_id}/annotated_from_firestore.png"
 
 # Fungsi untuk query Firestore berdasarkan user_id
+# NOTE: Firestore not actively used - function kept for future use
 def get_photo_url_from_firestore(user_id):
-    db = firestore.Client()
-    docs = db.collection('annotated_images')\
-        .where('user_id', '==', user_id)\
-        .order_by('created_at', direction=firestore.Query.DESCENDING)\
-        .limit(1).stream()
-    for doc in docs:
-        data = doc.to_dict()
-        return data.get('photo_url')
+    # db = firestore.Client()  # Commented out - firestore not in requirements
+    # docs = db.collection('annotated_images')\
+    #     .where('user_id', '==', user_id)\
+    #     .order_by('created_at', direction=firestore.Query.DESCENDING)\
+    #     .limit(1).stream()
+    # for doc in docs:
+    #     data = doc.to_dict()
+    #     return data.get('photo_url')
     return None
 
 # Fungsi untuk download dan konversi ke base64

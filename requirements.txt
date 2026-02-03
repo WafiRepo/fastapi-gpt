@@ -1,16 +1,19 @@
+# Evaluation dependencies
+nltk>=3.8
+rouge-score>=0.1.2
+bert-score>=0.3.13
+matplotlib>=3.7.0
+pandas>=2.0.0
+
+# Existing dependencies
 fastapi
 uvicorn
 python-dotenv
 pydantic
 openai
 PyPDF2
-pandas
 numpy
-matplotlib
 mysql-connector-python
 python-multipart
 opencv-python
-langchain
-langchain-community
-langchain-openai
-faiss-cpu
+requests

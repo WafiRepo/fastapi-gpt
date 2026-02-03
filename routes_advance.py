@@ -33,7 +33,14 @@ routes_advance = APIRouter()
 # -------------------------------------------------------------------
 # Load environment, init GPT
 # -------------------------------------------------------------------
-load_dotenv()
+# Load .env from the same directory as this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(script_dir, '.env')
+if os.path.exists(env_path):
+    load_dotenv(dotenv_path=env_path)
+else:
+    # Fallback: try current directory
+    load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 

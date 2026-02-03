@@ -17,7 +17,14 @@ from router_analyze_data import get_db_connection
 routes_radius = APIRouter()
 
 # Load environment variables
-load_dotenv()
+# Load .env from the same directory as this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(script_dir, '.env')
+if os.path.exists(env_path):
+    load_dotenv(dotenv_path=env_path)
+else:
+    # Fallback: try current directory
+    load_dotenv()
 
 # Setup logging
 logger = logging.getLogger(__name__)

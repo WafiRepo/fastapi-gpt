@@ -9,8 +9,14 @@ from routes_intermediate import routes_intermediate
 from routes_advance import routes_advance
 from routes_radius import routes_radius
 import uvicorn
+import os
 
 app = FastAPI()
+
+# Create evaluation_plot directory if it doesn't exist
+evaluation_plot_dir = "evaluation_plot"
+if not os.path.exists(evaluation_plot_dir):
+    os.makedirs(evaluation_plot_dir)
 
 # Mount static folder for evaluation_plot
 app.mount("/evaluation_plot", StaticFiles(directory="evaluation_plot"), name="evaluation_plot")

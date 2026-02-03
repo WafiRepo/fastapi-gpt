@@ -4,6 +4,18 @@ import mysql.connector
 from mysql.connector import Error
 from typing import List
 import json
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+# Load .env from the same directory as this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(script_dir, '.env')
+if os.path.exists(env_path):
+    load_dotenv(dotenv_path=env_path)
+else:
+    # Fallback: try current directory
+    load_dotenv()
 
 router_analyze_data = APIRouter()
 
@@ -19,10 +31,10 @@ class BufferData(BaseModel):
 def get_db_connection():
     try:
         connection = mysql.connector.connect(
-            host="127.0.0.1",  # Or use 'localhost'
-            user="fastapi_user",  # Your MySQL username
-            password="SecurePass123!",  # Your MySQL root password
-            database="sensor_data"  # Your MySQL database name
+            host=os.getenv("DB_HOST", "127.0.0.1"),
+            user=os.getenv("DB_USER", "root"),
+            password=os.getenv("DB_PASSWORD", ""),
+            database=os.getenv("DB_NAME", "sensor_data")
         )
         return connection
     except Error as e:
