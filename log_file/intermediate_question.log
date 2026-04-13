@@ -8597,3 +8597,166 @@ In the context of Indonesia, this analysis could be relevant for applications su
 
 This setup is likely used to help students or visitors understand the principles of circular motion, specifically how centripetal acceleration works in a practical and visual manner.
 2025-08-27 08:36:53,460 - INFO - Generated question: Selama fase stabil dari sekitar 7.3 detik, roda hamster playground dengan jari-jari (r) sebesar 82.00 cm berputar dengan kecepatan sudut (Ï‰) stabil sekitar 2.38 rad/s. Berapakah nilai percepatan sentripetal (a) yang diamati pada fase tersebut?
+2026-04-01 10:49:02,240 - INFO - Request received. language=indonesia, user_id=qZbjrBpk21gB5dluTsyuQBWVVrJ3
+2026-04-01 10:49:03,372 - INFO - DataFrame:
+    Time (s)  Angular velocity (£s) rad/s  Centripetal Acceleration (a) (m/s^2)
+0       0.22                        0.87                                  0.00
+1       0.56                        0.44                                  0.46
+2       1.05                        1.42                                  0.40
+3       1.54                        1.41                                  3.07
+4       2.03                        1.56                                  3.56
+5       2.52                        0.96                                  9.15
+6       3.01                        1.03                                  6.98
+7       3.50                        1.66                                  6.75
+8       3.99                        0.89                                  6.71
+9       4.48                        0.87                                 13.48
+10      5.38                        0.91                                 12.72
+11      5.88                        1.16                                 17.22
+12      6.88                        0.56                                 10.59
+13      7.88                        0.74                                  9.42
+14      8.88                        1.47                                  9.63
+15      9.88                        1.12                                 13.32
+16     10.88                        1.26                                 15.63
+17     11.89                        1.72                                  9.47
+18     12.89                        1.16                                  4.24
+19     13.89                        1.17                                  2.70
+20     14.39                        0.72                                  6.03
+21     14.89                        0.18                                  3.17
+2026-04-01 10:49:03,376 - INFO - Available columns: ['Time (s)', 'Angular velocity (£s) rad/s', 'Centripetal Acceleration (a) (m/s^2)']
+2026-04-01 10:49:03,376 - INFO - Selected Y-axis column: Angular velocity (£s) rad/s
+2026-04-01 10:49:03,377 - INFO - Selected question type: text+table+image
+2026-04-01 10:49:03,377 - ERROR - Internal Server Error: name 'pdf_path' is not defined
+2026-04-01 10:49:39,511 - INFO - Request received. language=indonesia, user_id=qZbjrBpk21gB5dluTsyuQBWVVrJ3
+2026-04-01 10:49:41,010 - INFO - DataFrame:
+    Time (s)  Angular velocity (£s) rad/s  Centripetal Acceleration (a) (m/s^2)
+0       0.22                        0.87                                  0.00
+1       0.56                        0.44                                  0.46
+2       1.05                        1.42                                  0.40
+3       1.54                        1.41                                  3.07
+4       2.03                        1.56                                  3.56
+5       2.52                        0.96                                  9.15
+6       3.01                        1.03                                  6.98
+7       3.50                        1.66                                  6.75
+8       3.99                        0.89                                  6.71
+9       4.48                        0.87                                 13.48
+10      5.38                        0.91                                 12.72
+11      5.88                        1.16                                 17.22
+12      6.88                        0.56                                 10.59
+13      7.88                        0.74                                  9.42
+14      8.88                        1.47                                  9.63
+15      9.88                        1.12                                 13.32
+16     10.88                        1.26                                 15.63
+17     11.89                        1.72                                  9.47
+18     12.89                        1.16                                  4.24
+19     13.89                        1.17                                  2.70
+20     14.39                        0.72                                  6.03
+21     14.89                        0.18                                  3.17
+2026-04-01 10:49:41,013 - INFO - Available columns: ['Time (s)', 'Angular velocity (£s) rad/s', 'Centripetal Acceleration (a) (m/s^2)']
+2026-04-01 10:49:41,014 - INFO - Selected Y-axis column: Angular velocity (£s) rad/s
+2026-04-01 10:49:41,014 - INFO - Selected question type: text+graph+image
+2026-04-01 10:49:41,014 - ERROR - Internal Server Error: name 'pdf_path' is not defined
+2026-04-13 01:56:21,749 - INFO - Request received. language=indonesia, user_id=qZbjrBpk21gB5dluTsyuQBWVVrJ3
+2026-04-13 01:56:23,226 - INFO - DataFrame:
+    Time (s)  Angular velocity (£s) rad/s  Centripetal Acceleration (a) (m/s^2)
+0       0.22                        1.92                                  0.00
+1       0.56                        1.08                                  1.86
+2       1.05                        0.91                                  1.00
+3       1.54                        0.59                                  4.03
+4       2.03                        0.73                                  2.10
+5       2.52                        0.53                                  2.27
+6       3.01                        0.48                                  3.37
+7       3.50                        0.47                                  1.69
+8       3.99                        0.67                                  3.83
+9       4.48                        1.03                                  2.42
+10      5.43                        0.80                                  6.17
+11      6.18                        0.93                                  5.54
+12      7.18                        0.48                                  6.18
+13      8.18                        0.72                                  6.86
+14      9.18                        0.47                                  6.00
+15     10.18                        0.44                                  6.07
+2026-04-13 01:56:23,230 - INFO - Available columns: ['Time (s)', 'Angular velocity (£s) rad/s', 'Centripetal Acceleration (a) (m/s^2)']
+2026-04-13 01:56:23,231 - INFO - Selected Y-axis column: Angular velocity (£s) rad/s
+2026-04-13 01:56:23,232 - INFO - Selected question type: text+table
+2026-04-13 01:56:23,234 - ERROR - Internal Server Error: name 'pdf_path' is not defined
+2026-04-13 01:56:47,859 - INFO - Request received. language=indonesia, user_id=qZbjrBpk21gB5dluTsyuQBWVVrJ3
+2026-04-13 01:56:48,997 - INFO - DataFrame:
+    Time (s)  Angular velocity (£s) rad/s  Centripetal Acceleration (a) (m/s^2)
+0       0.22                        1.92                                  0.00
+1       0.56                        1.08                                  1.86
+2       1.05                        0.91                                  1.00
+3       1.54                        0.59                                  4.03
+4       2.03                        0.73                                  2.10
+5       2.52                        0.53                                  2.27
+6       3.01                        0.48                                  3.37
+7       3.50                        0.47                                  1.69
+8       3.99                        0.67                                  3.83
+9       4.48                        1.03                                  2.42
+10      5.43                        0.80                                  6.17
+11      6.18                        0.93                                  5.54
+12      7.18                        0.48                                  6.18
+13      8.18                        0.72                                  6.86
+14      9.18                        0.47                                  6.00
+15     10.18                        0.44                                  6.07
+2026-04-13 01:56:49,007 - INFO - Available columns: ['Time (s)', 'Angular velocity (£s) rad/s', 'Centripetal Acceleration (a) (m/s^2)']
+2026-04-13 01:56:49,007 - INFO - Selected Y-axis column: Angular velocity (£s) rad/s
+2026-04-13 01:56:49,007 - INFO - Selected question type: text+graph+image
+2026-04-13 01:56:49,007 - ERROR - Internal Server Error: name 'pdf_path' is not defined
+2026-04-13 02:05:52,168 - INFO - Request received. language=indonesia, user_id=qZbjrBpk21gB5dluTsyuQBWVVrJ3
+2026-04-13 02:05:53,474 - INFO - DataFrame:
+    Time (s)  Angular velocity (£s) rad/s  Centripetal Acceleration (a) (m/s^2)
+0       0.22                        1.92                                  0.00
+1       0.56                        1.08                                  1.86
+2       1.05                        0.91                                  1.00
+3       1.54                        0.59                                  4.03
+4       2.03                        0.73                                  2.10
+5       2.52                        0.53                                  2.27
+6       3.01                        0.48                                  3.37
+7       3.50                        0.47                                  1.69
+8       3.99                        0.67                                  3.83
+9       4.48                        1.03                                  2.42
+10      5.43                        0.80                                  6.17
+11      6.18                        0.93                                  5.54
+12      7.18                        0.48                                  6.18
+13      8.18                        0.72                                  6.86
+14      9.18                        0.47                                  6.00
+15     10.18                        0.44                                  6.07
+2026-04-13 02:05:53,476 - INFO - Available columns: ['Time (s)', 'Angular velocity (£s) rad/s', 'Centripetal Acceleration (a) (m/s^2)']
+2026-04-13 02:05:53,477 - INFO - Selected Y-axis column: Angular velocity (£s) rad/s
+2026-04-13 02:05:53,477 - INFO - Selected question type: text+table+image
+2026-04-13 02:05:53,478 - ERROR - Internal Server Error: name 'pdf_path' is not defined
+2026-04-13 02:06:59,553 - INFO - Request received. language=indonesia, user_id=qZbjrBpk21gB5dluTsyuQBWVVrJ3
+2026-04-13 02:07:01,418 - INFO - DataFrame:
+    Time (s)  Angular velocity (£s) rad/s  Centripetal Acceleration (a) (m/s^2)
+0       0.22                        1.92                                  0.00
+1       0.56                        1.08                                  1.86
+2       1.05                        0.91                                  1.00
+3       1.54                        0.59                                  4.03
+4       2.03                        0.73                                  2.10
+5       2.52                        0.53                                  2.27
+6       3.01                        0.48                                  3.37
+7       3.50                        0.47                                  1.69
+8       3.99                        0.67                                  3.83
+9       4.48                        1.03                                  2.42
+10      5.43                        0.80                                  6.17
+11      6.18                        0.93                                  5.54
+12      7.18                        0.48                                  6.18
+13      8.18                        0.72                                  6.86
+14      9.18                        0.47                                  6.00
+15     10.18                        0.44                                  6.07
+2026-04-13 02:07:01,420 - INFO - Available columns: ['Time (s)', 'Angular velocity (£s) rad/s', 'Centripetal Acceleration (a) (m/s^2)']
+2026-04-13 02:07:01,423 - INFO - Selected Y-axis column: Angular velocity (£s) rad/s
+2026-04-13 02:07:01,423 - INFO - Selected question type: text+image
+2026-04-13 02:07:01,424 - WARNING - Few-shot PDF tidak ditemukan di E:\G-Physolve\G-Uphysic\fastapi-gpt\few_shot_questions.pdf ¡X melanjutkan tanpa contoh dari PDF.
+2026-04-13 02:07:06,013 - INFO - Local image interpretation: The image shows a person inside a large, circular structure, which seems to be similar to a playground wheel or a large hamster wheel. The notable features include:
+
+1. **Circular Motion**: The setup implies a context of circular motion, which is relevant to the discussion of centripetal acceleration. The person is positioned such that they might be experiencing forces related to this type of motion.
+
+2. **Arrows and Labels**: 
+   - The blue arrow labeled "a" likely represents the centripetal acceleration vector, pointing towards the center of the circle.
+   - The red arrow labeled "w" could denote angular velocity or some other form of rotational motion.
+   - The yellow line labeled "r" signifies the radius of the circular path.
+
+3. **Physical Context**: This setup is likely used to demonstrate principles of physics, such as how centripetal force works in a rotating system.
+
+Overall, the image is a practical illustration of concepts related to rotational motion and centripetal forces, possibly used for educational purposes.
+2026-04-13 02:07:07,989 - INFO - Generated question: Seorang siswa sedang berada di dalam sebuah struktur melingkar besar yang menyerupai roda hamster. Jika radius (r) dari roda tersebut adalah 7.25 cm, dan siswa tersebut bergerak dengan kecepatan sudut (£s) sebesar 2.5 rad/s, berapakah besarnya percepatan sentripetal (a) yang dialami oleh siswa tersebut?

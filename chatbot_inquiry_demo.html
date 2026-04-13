@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inquiry Chatbot Demo</title>
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --panel: #ffffff;
+      --panel-2: #f9fafb;
+      --text: #111827;
+      --muted: #6b7280;
+      --primary: #1f2937;
+      --secondary: #374151;
+      --danger: #b91c1c;
+      --border: #d1d5db;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 24px auto;
+      padding: 16px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+
+    h1, h2 { margin: 0 0 10px; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 17px; color: #111827; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    textarea { min-height: 90px; resize: vertical; }
+
+    button {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      border-color: var(--secondary);
+      color: white;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: white;
+    }
+
+    .chat {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      min-height: 180px;
+      max-height: 360px;
+      overflow-y: auto;
+    }
+
+    .msg {
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 8px;
+      line-height: 1.4;
+      white-space: pre-wrap;
+    }
+
+    .assistant {
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+    }
+
+    .user {
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .small { font-size: 12px; color: var(--muted); }
+    .error { color: #fca5a5; }
+    .loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 6px;
+      min-height: 20px;
+    }
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #d1d5db;
+      border-top-color: #4b5563;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    details {
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 10px;
+      background: #fafafa;
+    }
+    summary {
+      cursor: pointer;
+      color: #374151;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Inquiry Chatbot</h1>
+      <p class="small">Generate pertanyaan lalu kirim jawaban siswa.</p>
+      <div class="row">
+        <div>
+          <label for="mode">Tipe Pertanyaan</label>
+          <select id="mode">
+            <option value="problem_exploring" selected>Problem Exploring (Stage 1)</option>
+            <option value="problem_finding">Problem Finding</option>
+          </select>
+        </div>
+        <div>
+          <label for="userId">User ID</label>
+          <input id="userId" value="default" />
+        </div>
+        <div>
+          <label for="language">Language</label>
+          <select id="language">
+            <option value="id" selected>id (Bahasa Indonesia)</option>
+            <option value="en">en (English)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row-2">
+        <div>
+          <label for="topic">Topic</label>
+          <input id="topic" value="percepatan sentripetal" />
+        </div>
+        <div></div>
+      </div>
+      <div class="row-2" id="locationRow" style="display:none;">
+        <div>
+          <label for="location">Location (khusus problem-finding)</label>
+          <input id="location" value="kelas" />
+        </div>
+        <div></div>
+      </div>
+      <div class="row-2">
+        <button id="btnGenerate" class="btn-primary">1) Generate Pertanyaan</button>
+        <button id="btnClear" class="btn-danger">Clear Chat</button>
+      </div>
+      <div id="generateLoading" class="loading" style="display:none;">
+        <span class="spinner"></span>
+        <span>Sedang generate pertanyaan...</span>
+      </div>
+      <details>
+        <summary>Pengaturan Lanjutan</summary>
+        <div class="row">
+          <div>
+            <label for="baseUrl">Base URL API</label>
+            <input id="baseUrl" value="/api" />
+          </div>
+          <div>
+            <label for="sessionId">Session ID</label>
+            <input id="sessionId" value="sess-demo-001" />
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2>Chat</h2>
+      <div id="chatBox" class="chat"></div>
+      <div class="meta" id="metaInfo">Belum ada inquiry.</div>
+    </div>
+
+    <div class="card">
+      <h2>Jawaban Siswa</h2>
+      <div class="row-2">
+        <div>
+          <label for="submitEndpoint">Endpoint</label>
+          <select id="submitEndpoint">
+            <option value="/inquiry/generate/problem-exploring-stage-1/submit-response" selected>
+              /inquiry/generate/problem-exploring-stage-1/submit-response
+            </option>
+          </select>
+        </div>
+        <div></div>
+      </div>
+      <label for="answer">Tulis jawaban</label>
+      <textarea id="answer" placeholder="Contoh: Menurut saya semakin cepat fan berputar, ..."></textarea>
+      <div class="row-2" style="margin-top:10px;">
+        <button id="btnSubmit" class="btn-secondary">2) Kirim Jawaban</button>
+        <input id="inquiryId" value="inq-demo-001" title="inquiry_id opsional" />
+      </div>
+      <div id="submitLoading" class="loading" style="display:none;">
+        <span class="spinner"></span>
+        <span>Sedang memproses jawaban...</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = {
+      latestInquiry: "",
+      latestStage: "",
+      latestDetectedObject: "",
+    };
+
+    const chatBox = document.getElementById("chatBox");
+    const metaInfo = document.getElementById("metaInfo");
+    const btnGenerate = document.getElementById("btnGenerate");
+    const btnSubmit = document.getElementById("btnSubmit");
+    const btnClear = document.getElementById("btnClear");
+    const generateLoading = document.getElementById("generateLoading");
+    const submitLoading = document.getElementById("submitLoading");
+
+    function addMessage(role, text, extra = "") {
+      const div = document.createElement("div");
+      div.className = `msg ${role}`;
+      div.textContent = text;
+      if (extra) {
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.textContent = extra;
+        div.appendChild(meta);
+      }
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function setMeta() {
+      metaInfo.textContent =
+        `stage=${state.latestStage || "-"} | detected_object=${state.latestDetectedObject || "-"} | inquiry=${state.latestInquiry ? "ada" : "kosong"}`;
+    }
+
+    function updateModeUI() {
+      const mode = document.getElementById("mode").value;
+      const locationRow = document.getElementById("locationRow");
+      locationRow.style.display = mode === "problem_finding" ? "grid" : "none";
+    }
+
+    function getSubmitEndpoint() {
+      return document.getElementById("submitEndpoint").value;
+    }
+
+    function setGenerateLoading(isLoading) {
+      generateLoading.style.display = isLoading ? "inline-flex" : "none";
+      btnGenerate.disabled = isLoading;
+      btnClear.disabled = isLoading;
+      btnGenerate.style.opacity = isLoading ? "0.75" : "1";
+      btnClear.style.opacity = isLoading ? "0.75" : "1";
+    }
+
+    function setSubmitLoading(isLoading) {
+      submitLoading.style.display = isLoading ? "inline-flex" : "none";
+      btnSubmit.disabled = isLoading;
+      btnSubmit.style.opacity = isLoading ? "0.75" : "1";
+    }
+
+    async function postJson(url, body) {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const text = await res.text();
+      let data = null;
+      try { data = JSON.parse(text); } catch (_) {}
+      if (!res.ok) {
+        throw new Error(data ? JSON.stringify(data) : text || `HTTP ${res.status}`);
+      }
+      return data;
+    }
+
+    document.getElementById("btnGenerate").addEventListener("click", async () => {
+      const baseUrl = document.getElementById("baseUrl").value.trim();
+      const userId = document.getElementById("userId").value.trim() || "default";
+      const topic = document.getElementById("topic").value.trim() || "percepatan sentripetal";
+      const language = document.getElementById("language").value;
+      const mode = document.getElementById("mode").value;
+      const location = document.getElementById("location").value.trim();
+
+      const payload = mode === "problem_finding"
+        ? { user_id: userId, topic, location, language }
+        : { user_id: userId, topic, language };
+      const endpoint = mode === "problem_finding"
+        ? "/inquiry/generate/problem-finding"
+        : "/inquiry/generate/problem-exploring-stage-1";
+      addMessage("user", `Generate pertanyaan (${mode}).`);
+
+      setGenerateLoading(true);
+      try {
+        const data = await postJson(`${baseUrl}${endpoint}`, payload);
+        state.latestInquiry = data.inquiry || "";
+        state.latestStage = data.stage || "";
+        state.latestDetectedObject = data.detected_object || "";
+        setMeta();
+        addMessage("assistant", data.inquiry || "(inquiry kosong)");
+      } catch (err) {
+        addMessage("assistant error", "Gagal generate inquiry. Silakan coba lagi.");
+      } finally {
+        setGenerateLoading(false);
+      }
+    });
+
+    document.getElementById("btnSubmit").addEventListener("click", async () => {
+      const baseUrl = document.getElementById("baseUrl").value.trim();
+      const userId = document.getElementById("userId").value.trim() || "default";
+      const topic = document.getElementById("topic").value.trim() || "percepatan sentripetal";
+      const language = document.getElementById("language").value;
+      const sessionId = document.getElementById("sessionId").value.trim() || null;
+      const inquiryId = document.getElementById("inquiryId").value.trim() || null;
+      const responseText = document.getElementById("answer").value.trim();
+      const submitEndpoint = getSubmitEndpoint();
+
+      if (!responseText) {
+        alert("Isi jawaban siswa dulu.");
+        return;
+      }
+      if (!submitEndpoint || !submitEndpoint.startsWith("/")) {
+        alert("Endpoint submit harus dimulai dengan '/'.");
+        return;
+      }
+
+      const payload = {
+        user_id: userId,
+        response_text: responseText,
+        inquiry_id: inquiryId,
+        topic,
+        session_id: sessionId,
+        language,
+      };
+
+      addMessage("user", responseText);
+
+      setSubmitLoading(true);
+      try {
+        const data = await postJson(`${baseUrl}${submitEndpoint}`, payload);
+        let result = "";
+        if (data.matched_answer_type === "uncertain" && Array.isArray(data.step_by_step) && data.step_by_step.length) {
+          const lines = data.step_by_step.map((s, i) => `${i + 1}. ${String(s).trim()}`).filter(Boolean);
+          result = lines.join("\n");
+          if (data.example) result += "\n\nContoh: " + String(data.example).trim();
+          if (data.comprehension_check) result += "\n\n" + String(data.comprehension_check).trim();
+        } else {
+          const parts = [];
+          if (data.feedback) parts.push(data.feedback);
+          if (data.next_step) parts.push(data.next_step);
+          result = parts.length ? parts.join("\n\n") : "Respons diterima.";
+        }
+        addMessage("assistant", result);
+      } catch (err) {
+        addMessage("assistant error", "Gagal memproses jawaban. Silakan coba lagi.");
+      } finally {
+        setSubmitLoading(false);
+      }
+    });
+
+    document.getElementById("btnClear").addEventListener("click", () => {
+      chatBox.innerHTML = "";
+      state.latestInquiry = "";
+      state.latestStage = "";
+      state.latestDetectedObject = "";
+      setMeta();
+    });
+
+    document.getElementById("mode").addEventListener("change", updateModeUI);
+    updateModeUI();
+    setMeta();
+  </script>
+</body>
+</html>

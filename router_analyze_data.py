@@ -27,6 +27,11 @@ class BufferData(BaseModel):
     gyr_squared: List[float] = []
     t: List[float] = []
 
+
+class SaveExperimentLocationRequest(BaseModel):
+    user_id: str
+    location: str
+
 # Function to establish database connection
 def get_db_connection():
     try:
@@ -75,4 +80,30 @@ async def add_buffer_data(data: BufferData):
         raise HTTPException(status_code=500, detail="Failed to add buffer data")
     finally:
         cursor.close()
+        connection.close()
+
+
+@router_analyze_data.post("/save-experiment-location/")
+async def save_experiment_location(req: SaveExperimentLocationRequest):
+    """Simpan lokasi eksperimen (Out-of-Class) ke sensor_data.data_buffer untuk user."""
+    connection = get_db_connection()
+    if not connection:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    location_clean = (req.location or "").strip() or "Lokasi tidak diisi"
+    cursor = None
+    try:
+        cursor = connection.cursor()
+        data_json = json.dumps({"location": location_clean})
+        cursor.execute(
+            "INSERT INTO data_buffer (user_id, buffer_name, data) VALUES (%s, %s, %s)",
+            (req.user_id, "experiment_location", data_json),
+        )
+        connection.commit()
+        return {"message": "Location saved", "location": location_clean}
+    except Error as e:
+        print("Error saving experiment location:", e)
+        raise HTTPException(status_code=500, detail="Failed to save location")
+    finally:
+        if cursor:
+            cursor.close()
         connection.close()

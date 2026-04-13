@@ -1,0 +1,11 @@
+{
+  "gpt-4o": {
+    "bleu1_mean": 44.09502911147316,
+    "bleu1_norm": 0.4409502911147316,
+    "rougeL_mean": 0.3221944114025149,
+    "bertscore_f1_mean": 0.8966842770576477,
+    "geval_overall_mean": 4.16,
+    "geval_overall_norm_mean": 0.8320000000000001,
+    "composite_score": 0.6229572448937235
+  }
+}

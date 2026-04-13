@@ -21,6 +21,7 @@ import csv
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -46,6 +47,147 @@ try:
 except ImportError:
     # python-dotenv not installed, skip .env loading
     pass
+
+
+def _resolve_llm_config(allow_openai_fallback: bool = True) -> Dict[str, str]:
+    explicit_key = os.getenv("LLM_API_KEY", "").strip()
+    explicit_base = os.getenv("LLM_API_BASE_URL", "").strip()
+    if explicit_key or explicit_base:
+        return {
+            # Ollama biasanya tidak butuh API key; pakai dummy jika base URL explicit diberikan.
+            "api_key": explicit_key or "dummy",
+            "base_url": explicit_base or "https://api.openai.com/v1/chat/completions",
+        }
+
+    openrouter_key = os.getenv("OPENROUTER_API_KEY", "").strip()
+    if openrouter_key:
+        return {
+            "api_key": openrouter_key,
+            "base_url": os.getenv("OPENROUTER_API_BASE_URL", "").strip() or "https://openrouter.ai/api/v1/chat/completions",
+        }
+
+    openai_key = os.getenv("OPENAI_API_KEY", "").strip()
+    if allow_openai_fallback and openai_key:
+        return {
+            "api_key": openai_key,
+            "base_url": "https://api.openai.com/v1/chat/completions",
+        }
+
+    return {"api_key": "", "base_url": "https://api.openai.com/v1/chat/completions"}
+
+
+def _llm_timeout() -> int:
+    """Request timeout in seconds. Env LLM_REQUEST_TIMEOUT (default 180) untuk Ollama/lokal."""
+    try:
+        return max(60, int(os.getenv("LLM_REQUEST_TIMEOUT", "500")))
+    except ValueError:
+        return 180
+
+
+def _llm_max_retries() -> int:
+    """Total attempts for LLM HTTP requests (default 3)."""
+    try:
+        return max(1, int(os.getenv("LLM_MAX_RETRIES", "3")))
+    except ValueError:
+        return 3
+
+
+def _post_with_retry(requests_module: Any, base_url: str, headers: Dict[str, str], payload: Dict[str, Any]) -> Any:
+    """POST with retry/backoff for transient timeout/network/server errors."""
+    attempts = _llm_max_retries()
+    last_exc: Optional[Exception] = None
+    for attempt in range(1, attempts + 1):
+        try:
+            response = requests_module.post(
+                base_url,
+                headers=headers,
+                json=payload,
+                timeout=_llm_timeout(),
+            )
+            response.raise_for_status()
+            return response
+        except requests_module.exceptions.RequestException as exc:  # type: ignore[attr-defined]
+            last_exc = exc
+            if attempt >= attempts:
+                break
+            wait_s = min(30, 2 ** (attempt - 1))
+            print(
+                f"WARNING: LLM request failed ({type(exc).__name__}) "
+                f"[attempt {attempt}/{attempts}] to {base_url}. Retrying in {wait_s}s...",
+                file=sys.stderr,
+            )
+            time.sleep(wait_s)
+
+    raise RuntimeError(f"LLM request failed after {attempts} attempts: {last_exc}") from last_exc
+
+
+def _is_openai_model(model: str) -> bool:
+    m = (model or "").strip().lower()
+    if m.startswith("openai/"):
+        return True
+    return m in ("gpt-4o", "gpt-4o-mini", "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo")
+
+
+def _is_openrouter_model(model: str) -> bool:
+    """Models that must be routed via OpenRouter only."""
+    m = (model or "").strip().lower()
+    return m in (
+        "qwen3-vl:30b",
+        "qwen/qwen3.5-397b-a17b",
+        "qwen/qwen3-vl-235b-a22b-thinking",
+    )
+
+
+OPENROUTER_MODEL_IDS = {
+    "qwen3-vl:30b": "qwen/qwen3-vl-30b-a3b-instruct",
+}
+
+
+def _api_model_id(model: str, base_url: str) -> str:
+    """Return model ID to send in API request. OpenRouter needs official id."""
+    if "openrouter.ai" in (base_url or ""):
+        m = (model or "").strip().lower()
+        if m in OPENROUTER_MODEL_IDS:
+            return OPENROUTER_MODEL_IDS[m]
+    return model
+
+
+def _resolve_openrouter_config() -> Dict[str, str]:
+    openrouter_key = os.getenv("OPENROUTER_API_KEY", "").strip()
+    if not openrouter_key:
+        raise RuntimeError("OpenRouter model requires OPENROUTER_API_KEY.")
+    return {
+        "api_key": openrouter_key,
+        "base_url": os.getenv("OPENROUTER_API_BASE_URL", "").strip() or "https://openrouter.ai/api/v1/chat/completions",
+    }
+
+
+def _resolve_llm_config_for_model(model: str) -> Dict[str, str]:
+    """Resolve API config with strict provider routing per model."""
+    if _is_openai_model(model):
+        openai_key = os.getenv("OPENAI_API_KEY", "").strip()
+        if openai_key:
+            return {"api_key": openai_key, "base_url": "https://api.openai.com/v1/chat/completions"}
+        return {"api_key": "", "base_url": "https://api.openai.com/v1/chat/completions"}
+    if _is_openrouter_model(model):
+        return _resolve_openrouter_config()
+    raise RuntimeError(
+        f"Model '{model}' is disabled. Use gpt-4o (OpenAI) or an allowed OpenRouter model."
+    )
+
+
+def _build_llm_headers(api_key: str, base_url: str) -> Dict[str, str]:
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+    if "openrouter.ai" in base_url:
+        referer = os.getenv("OPENROUTER_HTTP_REFERER", "").strip()
+        title = os.getenv("OPENROUTER_X_TITLE", "").strip() or "G-Uphysic evaluation"
+        if referer:
+            headers["HTTP-Referer"] = referer
+        headers["X-Title"] = title
+    return headers
 
 
 DEFAULT_RUBRIC = [
@@ -75,7 +217,7 @@ DEFAULT_RUBRIC = [
 INQUIRY_EVAL_RUBRIC = [
     {
         "name": "Stage alignment",
-        "description": "How well the inquiry matches the intended stage (problem_finding/problem_exploring).",
+        "description": "How well the inquiry matches the intended stage (problem_finding/problem_exploring/problem_generating).",
         "scale": "1=not aligned, 3=partially aligned, 5=fully aligned",
     },
     {
@@ -276,6 +418,14 @@ def compute_corpus_bleu(
     candidates: List[str],
     references_list: List[List[str]],
 ) -> Tuple[float, float]:
+    if not candidates or not references_list or len(candidates) != len(references_list):
+        return 0.0, 0.0
+    valid_pairs = [(c, r) for c, r in zip(candidates, references_list) if r]
+    if not valid_pairs:
+        return 0.0, 0.0
+    candidates = [c for c, _ in valid_pairs]
+    references_list = [r for _, r in valid_pairs]
+
     try:
         from nltk.translate.bleu_score import corpus_bleu, SmoothingFunction  # type: ignore
     except ImportError:
@@ -289,20 +439,25 @@ def compute_corpus_bleu(
     smooth = SmoothingFunction().method1
     references_tokens = [[ref.split() for ref in refs] for refs in references_list]
     candidate_tokens = [cand.split() for cand in candidates]
+    if not references_tokens or not candidate_tokens:
+        return 0.0, 0.0
 
-    bleu1 = corpus_bleu(
-        references_tokens,
-        candidate_tokens,
-        weights=(1.0, 0.0, 0.0, 0.0),
-        smoothing_function=smooth,
-    )
-    bleu4 = corpus_bleu(
-        references_tokens,
-        candidate_tokens,
-        weights=(0.25, 0.25, 0.25, 0.25),
-        smoothing_function=smooth,
-    )
-    return bleu1, bleu4
+    try:
+        bleu1 = corpus_bleu(
+            references_tokens,
+            candidate_tokens,
+            weights=(1.0, 0.0, 0.0, 0.0),
+            smoothing_function=smooth,
+        )
+        bleu4 = corpus_bleu(
+            references_tokens,
+            candidate_tokens,
+            weights=(0.25, 0.25, 0.25, 0.25),
+            smoothing_function=smooth,
+        )
+        return bleu1, bleu4
+    except ZeroDivisionError:
+        return 0.0, 0.0
 
 
 def compute_rouge(candidate: str, references: List[str], lang: str) -> Dict[str, float]:
@@ -324,26 +479,88 @@ def compute_rouge(candidate: str, references: List[str], lang: str) -> Dict[str,
 
 
 def compute_bertscore(candidate: str, references: List[str], lang: str) -> Dict[str, float]:
-    try:
-        from bert_score import score as bert_score  # type: ignore
-    except Exception as exc:
-        raise RuntimeError("bert-score is required. Install with: pip install bert-score") from exc
+    if not references:
+        return {"precision": 0.0, "recall": 0.0, "f1": 0.0}
 
+    # Jalankan BERTScore di subprocess untuk mengisolasi native crash (0xC0000005) di Windows.
+    # Default ke CPU agar lebih stabil; override dengan env BERTSCORE_DEVICE jika diperlukan.
     model_type = "roberta-large" if lang == "en" else "xlm-roberta-large"
+    device = os.getenv("BERTSCORE_DEVICE", "cpu").strip() or "cpu"
+    timeout_s = int(os.getenv("BERTSCORE_TIMEOUT", "600"))
 
-    best_p, best_r, best_f1 = 0.0, 0.0, 0.0
-    for ref in references:
-        p, r, f1 = bert_score(
-            [candidate],
-            [ref],
-            model_type=model_type,
-            lang=None if lang != "en" else "en",
-            verbose=False,
+    payload = {
+        "candidate": candidate,
+        "references": references,
+        "model_type": model_type,
+        "lang": "en" if lang == "en" else None,
+        "device": device,
+    }
+
+    worker_code = r"""
+import json, os, sys
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+from bert_score import score as bert_score
+
+payload = json.loads(sys.stdin.read())
+candidate = payload["candidate"]
+references = payload["references"]
+model_type = payload["model_type"]
+lang = payload.get("lang")
+device = payload.get("device") or "cpu"
+
+cands = [candidate] * len(references)
+p, r, f1 = bert_score(
+    cands,
+    references,
+    model_type=model_type,
+    lang=lang,
+    verbose=False,
+    batch_size=1,
+    device=device,
+)
+
+print(json.dumps({
+    "precision": float(max(p).item()),
+    "recall": float(max(r).item()),
+    "f1": float(max(f1).item()),
+}, ensure_ascii=True))
+"""
+
+    try:
+        proc = subprocess.run(
+            [sys.executable, "-c", worker_code],
+            input=json.dumps(payload, ensure_ascii=True),
+            text=True,
+            capture_output=True,
+            timeout=timeout_s,
+            check=False,
         )
-        best_p = max(best_p, float(p[0]))
-        best_r = max(best_r, float(r[0]))
-        best_f1 = max(best_f1, float(f1[0]))
-    return {"precision": best_p, "recall": best_r, "f1": best_f1}
+    except subprocess.TimeoutExpired:
+        print(
+            f"WARNING: BERTScore timed out after {timeout_s}s. Returning 0.0 scores.",
+            file=sys.stderr,
+        )
+        return {"precision": 0.0, "recall": 0.0, "f1": 0.0}
+    except Exception as exc:
+        print(f"WARNING: Failed to run BERTScore subprocess: {exc}", file=sys.stderr)
+        return {"precision": 0.0, "recall": 0.0, "f1": 0.0}
+
+    if proc.returncode != 0:
+        err = (proc.stderr or "").strip()
+        msg = err.splitlines()[-1] if err else f"exit code {proc.returncode}"
+        print(f"WARNING: BERTScore subprocess failed ({msg}). Returning 0.0 scores.", file=sys.stderr)
+        return {"precision": 0.0, "recall": 0.0, "f1": 0.0}
+
+    try:
+        parsed = json.loads((proc.stdout or "").strip())
+        return {
+            "precision": float(parsed.get("precision", 0.0)),
+            "recall": float(parsed.get("recall", 0.0)),
+            "f1": float(parsed.get("f1", 0.0)),
+        }
+    except Exception:
+        print("WARNING: Invalid BERTScore subprocess output. Returning 0.0 scores.", file=sys.stderr)
+        return {"precision": 0.0, "recall": 0.0, "f1": 0.0}
 
 
 def _extract_json(text: str) -> Optional[Dict[str, Any]]:
@@ -374,13 +591,15 @@ def compute_g_eval_inquiry(
     except Exception as exc:
         raise RuntimeError("requests is required for G-eval. Install with: pip install requests") from exc
 
-    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    llm_cfg = _resolve_llm_config_for_model(model)
+    api_key = llm_cfg["api_key"]
+    base_url = llm_cfg["base_url"]
     if not api_key:
-        print("WARNING: OPENAI_API_KEY is not set. Skipping G-eval.", file=sys.stderr)
+        print("WARNING: No API key is set for G-eval model. Skipping G-eval.", file=sys.stderr)
         return {
             "overall_score": None,
             "rubric_scores": {},
-            "rationale": "G-eval skipped: OPENAI_API_KEY not set",
+            "rationale": "G-eval skipped: no API key set",
         }
 
     system_msg = (
@@ -391,15 +610,26 @@ def compute_g_eval_inquiry(
 
     messages = [{"role": "system", "content": system_msg}]
 
-    scoring_instructions = (
-        "Score each rubric from 1 to 5. overall_score is the average. "
-        "Evaluate the inquiry question quality: "
-        "- Does it match the stage requirements (problem_finding invites observation/curiosity, conceptual probes reasoning, application requires problem-solving)? "
-        "- Is it relevant to the topic (centripetal acceleration)? "
-        "- Is it clear, well-structured, and appropriate for Grade 11 students? "
-        "- Does it use the context effectively? "
-        "- Does it invite the right type of thinking for the stage?"
-    )
+    if stage == "problem_generating":
+        scoring_instructions = (
+            "Score each rubric from 1 to 5. overall_score is the average. "
+            "Evaluate generated problem question quality: "
+            "- Does it clearly represent a solvable physics problem (not explanation text)? "
+            "- Is the problem relevant to centripetal acceleration? "
+            "- Is it clear, complete, and appropriate for Grade 11 students? "
+            "- Does it integrate context/data from provided multimodal setup when context is available? "
+            "- Is the cognitive demand aligned with the intended difficulty level if mentioned?"
+        )
+    else:
+        scoring_instructions = (
+            "Score each rubric from 1 to 5. overall_score is the average. "
+            "Evaluate the inquiry question quality: "
+            "- Does it match the stage requirements (problem_finding invites observation/curiosity, conceptual probes reasoning, application requires problem-solving)? "
+            "- Is it relevant to the topic (centripetal acceleration)? "
+            "- Is it clear, well-structured, and appropriate for Grade 11 students? "
+            "- Does it use the context effectively? "
+            "- Does it invite the right type of thinking for the stage?"
+        )
 
     user_payload = {
         "stage": stage,
@@ -411,18 +641,15 @@ def compute_g_eval_inquiry(
     }
     messages.append({"role": "user", "content": json.dumps(user_payload, ensure_ascii=True)})
 
-    response = requests.post(
-        "https://api.openai.com/v1/chat/completions",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "model": model,
+    response = _post_with_retry(
+        requests_module=requests,
+        base_url=base_url,
+        headers=_build_llm_headers(api_key=api_key, base_url=base_url),
+        payload={
+            "model": _api_model_id(model, base_url),
             "messages": messages,
             "temperature": 0,
         },
-        timeout=60,
     )
     response.raise_for_status()
     data = response.json()
@@ -450,13 +677,15 @@ def compute_g_eval(
     except Exception as exc:
         raise RuntimeError("requests is required for G-eval. Install with: pip install requests") from exc
 
-    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    llm_cfg = _resolve_llm_config_for_model(model)
+    api_key = llm_cfg["api_key"]
+    base_url = llm_cfg["base_url"]
     if not api_key:
-        print("WARNING: OPENAI_API_KEY is not set. Skipping G-eval.", file=sys.stderr)
+        print("WARNING: No API key is set for G-eval model. Skipping G-eval.", file=sys.stderr)
         return {
             "overall_score": None,
             "rubric_scores": {},
-            "rationale": "G-eval skipped: OPENAI_API_KEY not set",
+            "rationale": "G-eval skipped: no API key set",
         }
 
     # Customize system message based on stage
@@ -540,18 +769,15 @@ def compute_g_eval(
     }
     messages.append({"role": "user", "content": json.dumps(user_payload, ensure_ascii=True)})
 
-    response = requests.post(
-        "https://api.openai.com/v1/chat/completions",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "model": model,
+    response = _post_with_retry(
+        requests_module=requests,
+        base_url=base_url,
+        headers=_build_llm_headers(api_key=api_key, base_url=base_url),
+        payload={
+            "model": _api_model_id(model, base_url),
             "messages": messages,
             "temperature": 0,
         },
-        timeout=60,
     )
     response.raise_for_status()
     data = response.json()
@@ -569,7 +795,7 @@ def mean(values: List[float]) -> float:
     return sum(values) / len(values)
 
 
-def write_metric_curves(results: List[Dict[str, Any]], output_dir: str) -> None:
+def write_metric_curves(results: List[Dict[str, Any]], output_dir: str, bleu_scale: str = "0-1") -> None:
     try:
         import matplotlib.pyplot as plt  # type: ignore
     except Exception as exc:
@@ -608,7 +834,15 @@ def write_metric_curves(results: List[Dict[str, Any]], output_dir: str) -> None:
         plt.title(f"{key} curve")
         plt.xlabel("Inquiry index")
         plt.ylabel(key)
-        plt.ylim(0, 1)
+        if key in ("bleu1", "bleu4"):
+            if bleu_scale == "0-100":
+                plt.ylim(0, 100)
+            else:
+                plt.ylim(0, 1)
+        elif key == "geval_overall":
+            plt.ylim(0, 5)
+        else:
+            plt.ylim(0, 1)
         plt.tight_layout()
         filename = os.path.join(output_dir, f"{key}_curve.png")
         plt.savefig(filename, dpi=150)
@@ -630,7 +864,14 @@ def write_metric_curves(results: List[Dict[str, Any]], output_dir: str) -> None:
                     values.append(None)
             if all(v is None for v in values):
                 continue
-            out[key] = [v if v is not None else float("nan") for v in values]
+            if key == "geval_overall":
+                # Normalize G-eval (1-5) to 0-1 for combined panel consistency.
+                out["geval_overall_norm"] = [
+                    (v / 5.0) if v is not None else float("nan")
+                    for v in values
+                ]
+            else:
+                out[key] = [v if v is not None else float("nan") for v in values]
         return out
 
     bleu_series = series_for(bleu_keys)
@@ -643,7 +884,7 @@ def write_metric_curves(results: List[Dict[str, Any]], output_dir: str) -> None:
                 axes[0].plot(x, y, marker="o", linewidth=1, markersize=3, label=key)
             axes[0].set_title("BLEU curves")
             axes[0].set_ylabel("BLEU")
-            axes[0].set_ylim(0, 1)
+            axes[0].set_ylim(0, 100 if bleu_scale == "0-100" else 1)
             axes[0].legend(loc="best")
             axes[0].grid(True, alpha=0.3)
         else:
@@ -652,7 +893,7 @@ def write_metric_curves(results: List[Dict[str, Any]], output_dir: str) -> None:
         if other_series:
             for key, y in other_series.items():
                 axes[1].plot(x, y, marker="o", linewidth=1, markersize=3, label=key)
-            axes[1].set_title("ROUGE / BERTScore / G-eval curves")
+            axes[1].set_title("ROUGE / BERTScore / G-eval(norm) curves")
             axes[1].set_xlabel("Inquiry index")
             axes[1].set_ylabel("Score")
             axes[1].set_ylim(0, 1)
@@ -665,6 +906,68 @@ def write_metric_curves(results: List[Dict[str, Any]], output_dir: str) -> None:
         combined_path = os.path.join(output_dir, "combined_metrics.png")
         plt.savefig(combined_path, dpi=150)
         plt.close()
+
+
+def write_difficulty_plots(results: List[Dict[str, Any]], output_dir: str, bleu_scale: str = "0-1") -> None:
+    """
+    Plot summary per difficulty (easy/intermediate/advanced) for problem_generating stage.
+    """
+    try:
+        import matplotlib.pyplot as plt  # type: ignore
+    except Exception as exc:
+        raise RuntimeError("matplotlib is required for PNG plots. Install with: pip install matplotlib") from exc
+
+    rows = [
+        r for r in results
+        if str(r.get("stage", "")) == "problem_generating" and str(r.get("difficulty", "")).strip()
+    ]
+    if not rows:
+        return
+
+    order = ["easy", "intermediate", "advanced"]
+    grouped: Dict[str, List[Dict[str, Any]]] = {k: [] for k in order}
+    for r in rows:
+        key = str(r.get("difficulty", "")).lower().strip()
+        if key in grouped:
+            grouped[key].append(r)
+
+    available = [k for k in order if grouped[k]]
+    if not available:
+        return
+
+    def mean_metric(items: List[Dict[str, Any]], metric: str) -> float:
+        vals: List[float] = []
+        for it in items:
+            v = it.get(metric)
+            if isinstance(v, (int, float)):
+                vals.append(float(v))
+        return mean(vals) if vals else 0.0
+
+    bleu_vals = [mean_metric(grouped[d], "bleu1") for d in available]
+    rouge_vals = [mean_metric(grouped[d], "rougeL") for d in available]
+    bert_vals = [mean_metric(grouped[d], "bertscore_f1") for d in available]
+    geval_vals_norm = [mean_metric(grouped[d], "geval_overall") / 5.0 for d in available]
+
+    fig, axes = plt.subplots(2, 1, figsize=(10, 7))
+    axes[0].bar(available, bleu_vals, color="#4C78A8")
+    axes[0].set_title("BLEU-1 mean by difficulty (problem_generating)")
+    axes[0].set_ylabel("BLEU-1")
+    axes[0].set_ylim(0, 100 if bleu_scale == "0-100" else 1)
+    axes[0].grid(True, axis="y", alpha=0.3)
+
+    axes[1].plot(available, rouge_vals, marker="o", linewidth=1.5, label="rougeL_mean")
+    axes[1].plot(available, bert_vals, marker="o", linewidth=1.5, label="bertscore_f1_mean")
+    axes[1].plot(available, geval_vals_norm, marker="o", linewidth=1.5, label="geval_overall_norm_mean")
+    axes[1].set_title("Normalized quality metrics by difficulty")
+    axes[1].set_ylabel("Score (0-1)")
+    axes[1].set_ylim(0, 1)
+    axes[1].grid(True, alpha=0.3)
+    axes[1].legend(loc="best")
+
+    plt.tight_layout()
+    filename = os.path.join(output_dir, "difficulty_metrics.png")
+    plt.savefig(filename, dpi=150)
+    plt.close()
 
 
 def write_summary_plot(summary: Dict[str, float], output_dir: str) -> None:
@@ -749,9 +1052,12 @@ def main() -> int:
 
         row: Dict[str, Any] = {
             "id": item["id"],
+            "item_group_id": item.get("item_group_id", ""),
             "lang": lang,
             "stage": stage,
+            "difficulty": item.get("difficulty", ""),
             "prompt_type": item.get("prompt_type", ""),  # Include prompt_type if available
+            "knowledge_mode": item.get("knowledge_mode", "none"),
         }
 
         # EVALUASI INQUIRY QUALITY
@@ -804,15 +1110,26 @@ def main() -> int:
 
         # G-eval untuk inquiry quality (standalone)
         if not args.no_geval:
-            ge = compute_g_eval_inquiry(
-                stage=stage,
-                lang=lang,
-                inquiry=inquiry,
-                context=context,
-                rubric=INQUIRY_EVAL_RUBRIC,
-                model=args.geval_model,
-                use_few_shot=not args.no_few_shot,
-            )
+            try:
+                ge = compute_g_eval_inquiry(
+                    stage=stage,
+                    lang=lang,
+                    inquiry=inquiry,
+                    context=context,
+                    rubric=INQUIRY_EVAL_RUBRIC,
+                    model=args.geval_model,
+                    use_few_shot=not args.no_few_shot,
+                )
+            except Exception as exc:
+                print(
+                    f"WARNING: G-eval failed for id={item['id']} stage={stage} lang={lang}: {exc}",
+                    file=sys.stderr,
+                )
+                ge = {
+                    "overall_score": None,
+                    "rubric_scores": {},
+                    "rationale": f"G-eval skipped due to error: {exc}",
+                }
             row.update(
                 {
                     "geval_overall": ge.get("overall_score"),
@@ -831,9 +1148,12 @@ def main() -> int:
 
     csv_columns = [
         "id",
+        "item_group_id",
         "lang",
         "stage",
+        "difficulty",
         "prompt_type",
+        "knowledge_mode",
         "bleu1",
         "bleu4",
         "rouge1",
@@ -850,7 +1170,11 @@ def main() -> int:
         for row in results:
             writer.writerow({k: row.get(k, "") for k in csv_columns})
 
-    corpus_bleu1, corpus_bleu4 = compute_corpus_bleu(corpus_candidates, corpus_references)
+    if not corpus_candidates or not corpus_references:
+        corpus_bleu1, corpus_bleu4 = 0.0, 0.0
+        print("WARNING: Empty corpus for BLEU; using corpus BLEU = 0.0.", file=sys.stderr)
+    else:
+        corpus_bleu1, corpus_bleu4 = compute_corpus_bleu(corpus_candidates, corpus_references)
     if args.bleu_scale == "0-100":
         corpus_bleu1 *= 100.0
         corpus_bleu4 *= 100.0
@@ -873,7 +1197,8 @@ def main() -> int:
     }
     print(json.dumps(summary, ensure_ascii=True, indent=2))
 
-    write_metric_curves(results, args.plots_dir)
+    write_metric_curves(results, args.plots_dir, bleu_scale=args.bleu_scale)
+    write_difficulty_plots(results, args.plots_dir, bleu_scale=args.bleu_scale)
     write_summary_plot(summary, args.plots_dir)
     return 0
 

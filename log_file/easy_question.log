@@ -12520,3 +12520,70 @@ This setup could be used for educational purposes to demonstrate the principles 
 
 This setup is likely used for educational purposes to demonstrate the principles of circular motion and centripetal acceleration.
 2025-08-27 07:33:45,928 - INFO - Generated question: Dapatkah kamu menjelaskan bagaimana vektor-vektor yang ditunjukkan dalam gambar mempengaruhi gerakan melingkar pada alat mekanis ini, dengan mempertimbangkan jari-jari (r), percepatan sentripetal (a), dan kecepatan sudut (Ï‰)?
+2026-04-01 10:49:19,759 - INFO - Request received. language=indonesia, user_id=qZbjrBpk21gB5dluTsyuQBWVVrJ3
+2026-04-01 10:49:20,733 - INFO - DataFrame:
+    Time (s)  Angular velocity (£s) rad/s  Centripetal Acceleration (a) (m/s^2)
+0       0.22                        0.87                                  0.00
+1       0.56                        0.44                                  0.46
+2       1.05                        1.42                                  0.40
+3       1.54                        1.41                                  3.07
+4       2.03                        1.56                                  3.56
+5       2.52                        0.96                                  9.15
+6       3.01                        1.03                                  6.98
+7       3.50                        1.66                                  6.75
+8       3.99                        0.89                                  6.71
+9       4.48                        0.87                                 13.48
+10      5.38                        0.91                                 12.72
+11      5.88                        1.16                                 17.22
+12      6.88                        0.56                                 10.59
+13      7.88                        0.74                                  9.42
+14      8.88                        1.47                                  9.63
+15      9.88                        1.12                                 13.32
+16     10.88                        1.26                                 15.63
+17     11.89                        1.72                                  9.47
+18     12.89                        1.16                                  4.24
+19     13.89                        1.17                                  2.70
+20     14.39                        0.72                                  6.03
+21     14.89                        0.18                                  3.17
+2026-04-01 10:49:20,734 - INFO - Available columns: ['Time (s)', 'Angular velocity (£s) rad/s', 'Centripetal Acceleration (a) (m/s^2)']
+2026-04-01 10:49:20,734 - INFO - Selected Y-axis column: Angular velocity (£s) rad/s
+2026-04-01 10:49:20,735 - INFO - Selected question type: text+image
+2026-04-01 10:49:20,735 - ERROR - Internal Server Error: name 'pdf_path' is not defined
+2026-04-13 02:07:40,647 - INFO - Request received. language=indonesia, user_id=qZbjrBpk21gB5dluTsyuQBWVVrJ3
+2026-04-13 02:07:41,639 - INFO - DataFrame:
+    Time (s)  Angular velocity (£s) rad/s  Centripetal Acceleration (a) (m/s^2)
+0       0.22                        1.92                                  0.00
+1       0.56                        1.08                                  1.86
+2       1.05                        0.91                                  1.00
+3       1.54                        0.59                                  4.03
+4       2.03                        0.73                                  2.10
+5       2.52                        0.53                                  2.27
+6       3.01                        0.48                                  3.37
+7       3.50                        0.47                                  1.69
+8       3.99                        0.67                                  3.83
+9       4.48                        1.03                                  2.42
+10      5.43                        0.80                                  6.17
+11      6.18                        0.93                                  5.54
+12      7.18                        0.48                                  6.18
+13      8.18                        0.72                                  6.86
+14      9.18                        0.47                                  6.00
+15     10.18                        0.44                                  6.07
+2026-04-13 02:07:41,641 - INFO - Available columns: ['Time (s)', 'Angular velocity (£s) rad/s', 'Centripetal Acceleration (a) (m/s^2)']
+2026-04-13 02:07:41,641 - INFO - Selected Y-axis column: Angular velocity (£s) rad/s
+2026-04-13 02:07:41,642 - INFO - Selected question type: text+table+image
+2026-04-13 02:07:41,642 - WARNING - Few-shot PDF tidak ditemukan di E:\G-Physolve\G-Uphysic\fastapi-gpt\few_shot_questions.pdf ¡X melanjutkan tanpa contoh dari PDF.
+2026-04-13 02:07:41,646 - INFO - Adaptive thresholds - Steady: 0.181, Increase: 0.148, Decrease: -0.074
+2026-04-13 02:07:48,895 - INFO - Local image interpretation: The image shows a person inside a large, circular structure, likely a playground apparatus resembling a human-sized hamster wheel. The person is positioned upside down, which suggests they are experiencing centripetal acceleration as they move along the circular path. 
+
+Key features:
+
+1. **Circular Path**: The structure is circular, which is essential for demonstrating centripetal acceleration, as this type of acceleration occurs when an object moves in a circular path.
+
+2. **Arrows and Labels**: 
+   - **w (angular velocity)**: This indicates the rate of rotation around the circle.
+   - **a (acceleration)**: Directed towards the center, representing centripetal acceleration, which keeps the person moving in a circular path.
+   - **r (radius)**: The distance from the center of the circle to the person, crucial for calculating centripetal acceleration.
+
+3. **Orientation**: The person's upside-down position suggests that they are at the top of the rotation, experiencing forces that keep them in motion along the circular path.
+
+Overall, the image illustrates the principles of circular motion and centripetal force, which are central to understanding dynamics in rotating systems.

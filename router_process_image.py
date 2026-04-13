@@ -305,6 +305,103 @@ class UpdateLabelRequest(BaseModel):
     image_path: str
     new_label: str
 
+
+# --- Validasi objek untuk centripetal ---
+CENTRIPETAL_OBJECTS_PATH = os.path.join(script_dir, "data", "knowledge_graphs", "centripetal_acceleration.json")
+_CENTRIPETAL_KEYWORDS_CACHE = None
+
+
+def _load_centripetal_keywords() -> set:
+    """Load semua keyword + nama objek dari KG yang terkait centripetal."""
+    global _CENTRIPETAL_KEYWORDS_CACHE
+    if _CENTRIPETAL_KEYWORDS_CACHE is not None:
+        return _CENTRIPETAL_KEYWORDS_CACHE
+    keywords = set()
+    try:
+        import json
+        if os.path.exists(CENTRIPETAL_OBJECTS_PATH):
+            with open(CENTRIPETAL_OBJECTS_PATH, "r", encoding="utf-8") as f:
+                kg = json.load(f)
+            for obj_name, payload in (kg.get("objects") or {}).items():
+                if isinstance(payload, dict):
+                    keywords.add(obj_name.replace("_", " ").lower().strip())
+                    for kw in payload.get("keywords", []) or []:
+                        keywords.add(str(kw).lower().strip())
+            # Tambah variasi umum
+            keywords.update(["fan", "wheel", "carousel", "turntable", "drum", "washer", "string", "spinner", "disk", "blade"])
+    except Exception as e:
+        logger.warning("Failed to load KG for centripetal validation: %s", e)
+    _CENTRIPETAL_KEYWORDS_CACHE = keywords
+    return keywords
+
+
+def _is_label_centripetal(label: str) -> bool:
+    """Cek apakah label cocok dengan objek centripetal (keyword atau substring)."""
+    if not label or not str(label).strip():
+        return False
+    normalized = str(label).lower().strip()
+    keywords = _load_centripetal_keywords()
+    # Exact match
+    if normalized in keywords:
+        return True
+    # Substring: salah satu keyword ada di label atau label ada di keyword
+    for kw in keywords:
+        if kw in normalized or normalized in kw:
+            return True
+    return False
+
+
+def _get_gpt_feedback_for_invalid_object(label: str) -> str:
+    """Dapatkan feedback dari GPT-4o untuk objek yang tidak valid."""
+    try:
+        examples = "fan, wheel, carousel, washing machine drum, ball on string, turntable, vegetable washer, salad spinner, bicycle wheel"
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a physics education assistant. Respond in Bahasa Indonesia only. "
+                    "Give a SHORT (1-2 sentences) friendly feedback when the user captures an object that is NOT related to centripetal acceleration. "
+                    "Suggest they capture objects that spin, rotate, or move in a circle. No explanation, just guidance."
+                },
+                {
+                    "role": "user",
+                    "content": f"The detected object is '{label}'. This is not related to centripetal acceleration. "
+                    f"Give brief feedback suggesting objects like: {examples}"
+                }
+            ],
+            max_tokens=80,
+            temperature=0.5
+        )
+        text = (response.choices[0].message.content or "").strip()
+        return text if text else "Objek ini tidak terkait gerak melingkar. Coba ambil foto objek yang berputar atau bergerak melingkar (misalnya kipas, roda, komidi putar)."
+    except Exception as e:
+        logger.warning("GPT feedback failed: %s", e)
+        return "Objek ini tidak terkait percepatan sentripetal. Silakan ambil foto objek yang berputar atau bergerak melingkar, misalnya: kipas, roda, komidi putar, mesin cuci, atau turntable."
+
+
+class ValidateObjectRequest(BaseModel):
+    label: str
+
+
+@router_process_image.post("/validate-object-centripetal/")
+async def validate_object_centripetal(data: ValidateObjectRequest):
+    """
+    Validasi apakah objek yang terdeteksi terkait centripetal acceleration.
+    Jika tidak valid, kembalikan feedback dari GPT-4o untuk memandu user.
+    """
+    label = (data.label or "").strip()
+    if not label:
+        return JSONResponse(content={
+            "valid": False,
+            "feedback": "Label objek kosong. Silakan isi atau konfirmasi label terlebih dahulu."
+        }, status_code=200)
+    is_valid = _is_label_centripetal(label)
+    if is_valid:
+        return JSONResponse(content={"valid": True, "feedback": None}, status_code=200)
+    feedback = _get_gpt_feedback_for_invalid_object(label)
+    return JSONResponse(content={"valid": False, "feedback": feedback}, status_code=200)
+
 # Fungsi untuk mendapatkan label terbaru berdasarkan ID (lebih reliable)
 def get_latest_label_by_id(user_id: str):
     connection = get_db_connection()

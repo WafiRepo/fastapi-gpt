@@ -26,6 +26,7 @@ from openai import OpenAI
 import openai
 
 from router_analyze_data import get_db_connection
+from few_shot_pdf_path import resolve_few_shot_pdf_path
 
 # --------------------------------------------------------
 # Initialize Router
@@ -484,9 +485,10 @@ def generate_intermediate_question(
     # ----------------------------------------------------------------
     # Few-Shot Prompting Setup
     # ----------------------------------------------------------------
-    # 1. Extract all possible questions from the source PDF
-    all_questions = extract_questions_from_pdf(pdf_path)
-    
+    # 1. Extract all possible questions from the source PDF (opsional)
+    _pdf = resolve_few_shot_pdf_path(script_dir, logger)
+    all_questions = extract_questions_from_pdf(_pdf) if _pdf else []
+
     # 2. Get a few random examples to guide the AI
     few_shot_examples = get_few_shot_examples(all_questions, num_examples=55)
 

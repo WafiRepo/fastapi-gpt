@@ -1,0 +1,74 @@
+{
+  "google_gemini-2.0-flash-001": {
+    "none": {
+      "bleu1_mean": 43.37168594445877,
+      "bleu1_norm": 0.4337168594445877,
+      "rougeL_mean": 0.3008996602588224,
+      "bertscore_f1_mean": 0.8863404512405395,
+      "geval_overall_mean": 4.4399999999999995,
+      "geval_overall_norm_mean": 0.8879999999999999,
+      "composite_score": 0.6272392427359874,
+      "item_count": 5.0
+    }
+  },
+  "gpt-4o": {
+    "none": {
+      "bleu1_mean": 63.359954831941934,
+      "bleu1_norm": 0.6335995483194193,
+      "rougeL_mean": 0.5191990816419232,
+      "bertscore_f1_mean": 0.9293054074048996,
+      "geval_overall_mean": 4.15,
+      "geval_overall_norm_mean": 0.8300000000000001,
+      "composite_score": 0.7280260093415605,
+      "item_count": 20.0
+    }
+  },
+  "openai_gpt-4o-mini": {
+    "none": {
+      "bleu1_mean": 37.217089826183326,
+      "bleu1_norm": 0.37217089826183325,
+      "rougeL_mean": 0.30482056590752243,
+      "bertscore_f1_mean": 0.8877092361450195,
+      "geval_overall_mean": 4.4399999999999995,
+      "geval_overall_norm_mean": 0.8879999999999999,
+      "composite_score": 0.6131751750785938,
+      "item_count": 5.0
+    }
+  },
+  "qwen3-vl_30b": {
+    "none": {
+      "bleu1_mean": 36.77489314206719,
+      "bleu1_norm": 0.36774893142067194,
+      "rougeL_mean": 0.25125256399565127,
+      "bertscore_f1_mean": 0.8802127453188101,
+      "geval_overall_mean": 4.0625,
+      "geval_overall_norm_mean": 0.8125,
+      "composite_score": 0.5779285601837834,
+      "item_count": 48.0
+    }
+  },
+  "qwen3-vl_8b": {
+    "none": {
+      "bleu1_mean": 32.53215675483169,
+      "bleu1_norm": 0.32532156754831687,
+      "rougeL_mean": 0.2943405142332895,
+      "bertscore_f1_mean": 0.8805674105882645,
+      "geval_overall_mean": 4.36,
+      "geval_overall_norm_mean": 0.8720000000000001,
+      "composite_score": 0.5930573730924678,
+      "item_count": 20.0
+    }
+  },
+  "qwen_qwen3-vl-235b-a22b-thinking": {
+    "none": {
+      "bleu1_mean": 37.17679779018462,
+      "bleu1_norm": 0.37176797790184624,
+      "rougeL_mean": 0.30852866895959996,
+      "bertscore_f1_mean": 0.8888779616355896,
+      "geval_overall_mean": 4.448,
+      "geval_overall_norm_mean": 0.8896000000000001,
+      "composite_score": 0.614693652124259,
+      "item_count": 25.0
+    }
+  }
+}

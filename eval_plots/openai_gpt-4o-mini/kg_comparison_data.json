@@ -1,0 +1,29 @@
+{
+  "problem_finding": {
+    "none": {
+      "bleu1_mean": 25.638475006399368,
+      "rougeL_mean": 0.28571428571428575,
+      "bertscore_f1_mean": 0.9003209471702576,
+      "geval_overall_mean": 4.2,
+      "count": 1.0
+    }
+  },
+  "problem_exploring": {
+    "none": {
+      "bleu1_mean": 39.98128785000744,
+      "rougeL_mean": 0.2777777777777778,
+      "bertscore_f1_mean": 0.8771843910217285,
+      "geval_overall_mean": 4.2,
+      "count": 1.0
+    }
+  },
+  "problem_generating": {
+    "none": {
+      "bleu1_mean": 40.15522875816993,
+      "rougeL_mean": 0.32020358868184956,
+      "bertscore_f1_mean": 0.8870136141777039,
+      "geval_overall_mean": 4.6,
+      "count": 3.0
+    }
+  }
+}

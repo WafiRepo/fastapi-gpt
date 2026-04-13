@@ -1,0 +1,255 @@
+{
+  "topic": "centripetal acceleration",
+  "core_concepts": [
+    "Centripetal acceleration always points toward the center of circular motion.",
+    "Its magnitude increases when angular velocity or linear speed increases.",
+    "Its magnitude decreases when the radius grows while other variables remain fixed.",
+    "In uniform circular motion, speed can remain constant while velocity still changes because its direction changes continuously.",
+    "Circular motion requires an inward acceleration and therefore an inward net force."
+  ],
+  "concepts": {
+    "centripetal_acceleration": {
+      "summary": "Describes the inward acceleration required to keep an object moving in a circular path.",
+      "variables": ["radius", "angular_velocity", "linear_speed", "period", "acceleration"],
+      "formulas": [
+        "a_c = v^2 / r",
+        "a_c = omega^2 * r",
+        "a_c = 4 * pi^2 * r / T^2",
+        "v = omega * r",
+        "v = 2 * pi * r / T",
+        "omega = 2 * pi / T"
+      ],
+      "facts": [
+        "In uniform circular motion, centripetal acceleration changes the direction of velocity, not its magnitude.",
+        "If an object moves in a circular path, an inward acceleration must exist even when speed is constant."
+      ]
+    },
+    "circular_motion": {
+      "summary": "Motion along a circular path with continuously changing velocity direction.",
+      "facts": [
+        "Uniform circular motion means the object moves around a circle at constant speed.",
+        "Constant speed does not mean constant velocity because velocity includes direction.",
+        "Velocity and centripetal acceleration are perpendicular in uniform circular motion."
+      ]
+    },
+    "centripetal_force": {
+      "summary": "The inward force that causes centripetal acceleration and keeps an object moving in a circular path.",
+      "variables": ["mass", "radius", "linear_speed", "period"],
+      "formulas": [
+        "F_c = m * v^2 / r",
+        "F_c = 4 * pi^2 * r * m / T^2"
+      ],
+      "facts": [
+        "Any object in uniform circular motion must experience a force toward the center.",
+        "Centripetal force is not a new kind of force; it can be supplied by gravity, tension, friction, or other real forces depending on the situation."
+      ]
+    },
+    "centrifugal_force": {
+      "summary": "An apparent outward force often discussed in rotating frames, not the real inward force that maintains circular motion.",
+      "facts": [
+        "Students often confuse centripetal force with centrifugal force.",
+        "Centrifugal force should not be treated as the real physical cause that keeps an object in circular motion in an inertial frame."
+      ]
+    }
+  },
+  "objects": {
+    "fan": {
+      "keywords": ["fan", "blade", "ceiling fan", "desk fan"],
+      "concepts": ["circular_motion", "centripetal_acceleration"],
+      "facts": [
+        "The blade tip follows a circular path.",
+        "Even at constant speed, the velocity direction keeps changing."
+      ]
+    },
+    "carousel": {
+      "keywords": ["carousel", "merry-go-round", "playground"],
+      "concepts": ["circular_motion", "centripetal_acceleration"],
+      "facts": [
+        "Riders move in a circle around the center.",
+        "Larger radius changes the centripetal acceleration relationship."
+      ]
+    },
+    "wheel": {
+      "keywords": ["wheel", "bicycle", "rotating disk", "turntable"],
+      "concepts": ["circular_motion", "centripetal_acceleration"],
+      "facts": [
+        "Points farther from the center travel larger circular paths.",
+        "Comparing inner and outer points supports radius reasoning."
+      ]
+    },
+    "washing_machine": {
+      "keywords": ["washing machine", "drum"],
+      "concepts": ["circular_motion", "centripetal_acceleration"],
+      "facts": [
+        "The rotating drum provides a familiar real-world example of circular motion."
+      ]
+    },
+    "ball_on_string": {
+      "keywords": ["washer", "string", "ball on string", "tension"],
+      "concepts": ["circular_motion", "centripetal_force"],
+      "facts": [
+        "Tension can act as the inward force that keeps the object moving in a circle.",
+        "A ball on a string is a classic example where centripetal force is supplied by tension."
+      ]
+    },
+    "vegetable_washer": {
+      "keywords": ["vegetable washer", "salad spinner", "vegetable spinner", "spinning basket"],
+      "concepts": ["circular_motion", "centripetal_acceleration"],
+      "facts": [
+        "The spinning basket rotates to remove water from vegetables.",
+        "Points on the basket follow circular paths with centripetal acceleration toward the center."
+      ]
+    },
+    "turntable": {
+      "keywords": ["turntable", "rotating platter", "microwave turntable"],
+      "concepts": ["circular_motion", "centripetal_acceleration"],
+      "facts": [
+        "The platter rotates at constant angular velocity for uniform playback.",
+        "Points farther from the center have larger linear speed and centripetal acceleration."
+      ]
+    },
+    "orbiting_body": {
+      "keywords": ["moon", "satellite", "earth orbit", "planet orbit"],
+      "concepts": ["circular_motion", "centripetal_acceleration", "centripetal_force"],
+      "facts": [
+        "An orbiting body can be modeled as circular motion with acceleration toward the center.",
+        "Gravity can provide the centripetal force for orbital motion."
+      ]
+    },
+    "car_on_curve": {
+      "keywords": ["car turning", "curve", "road bend", "runner on track"],
+      "concepts": ["circular_motion", "centripetal_force"],
+      "facts": [
+        "A car rounding a curve requires centripetal force toward the center of the turn.",
+        "On a flat road, friction can supply the required centripetal force."
+      ]
+    },
+    "hammer_throw": {
+      "keywords": ["hammer throw", "chain", "olympic hammer"],
+      "concepts": ["circular_motion", "centripetal_force"],
+      "facts": [
+        "The athlete and chain provide the inward force that keeps the hammer moving in a circle."
+      ]
+    },
+    "tetherball": {
+      "keywords": ["tetherball", "pole ball", "ball tied to pole"],
+      "concepts": ["circular_motion", "centripetal_force"],
+      "facts": [
+        "The ball is influenced by gravity and tension, which combine to produce the net centripetal force."
+      ]
+    }
+  },
+  "graph_patterns": {
+    "a_vs_r": {
+      "keywords": ["a vs r", "radius", "string length"],
+      "facts": [
+        "For fixed speed, larger radius lowers centripetal acceleration.",
+        "For fixed angular velocity, larger radius increases centripetal acceleration."
+      ]
+    },
+    "a_vs_w": {
+      "keywords": ["a vs w", "omega", "angular velocity", "speed"],
+      "facts": [
+        "Increasing angular velocity strongly increases centripetal acceleration.",
+        "The relationship is nonlinear because acceleration depends on omega squared."
+      ]
+    },
+    "period_data": {
+      "keywords": ["period", "sensor log", "stable period"],
+      "facts": [
+        "Period can be connected to angular velocity through omega = 2pi / T.",
+        "Linear speed can be connected to period through v = 2pi r / T.",
+        "Centripetal acceleration can be connected to period through a_c = 4pi^2 r / T^2."
+      ]
+    },
+    "time_vs_w": {
+      "keywords": ["time vs w", "t vs omega", "period vs angular velocity", "T vs ω"],
+      "facts": [
+        "Period T and angular velocity omega are inversely related: omega = 2pi / T.",
+        "When period (time per revolution) increases, angular velocity decreases."
+      ]
+    },
+    "time_vs_a": {
+      "keywords": ["time vs a", "t vs a", "period vs acceleration", "T vs a_c"],
+      "facts": [
+        "Centripetal acceleration depends on period through a_c = (2pi/T)^2 * r.",
+        "When period increases (slower rotation), centripetal acceleration decreases (inverse square)."
+      ]
+    },
+    "force_vs_speed": {
+      "keywords": ["force vs speed", "Fc vs v", "centripetal force graph"],
+      "facts": [
+        "For fixed mass and radius, centripetal force increases with the square of speed.",
+        "Doubling speed makes the required centripetal force four times larger."
+      ]
+    },
+    "force_vs_radius": {
+      "keywords": ["force vs radius", "Fc vs r"],
+      "facts": [
+        "For fixed mass and speed, centripetal force decreases as radius increases.",
+        "For fixed mass and period, centripetal force increases with radius."
+      ]
+    }
+  },
+  "stage_rules": {
+    "problem_finding": [
+      "Ask students to identify or find examples in their surroundings.",
+      "Avoid turning the question into a full explanation prompt.",
+      "Encourage students to distinguish between objects that merely rotate and situations where a specific point or object clearly follows a circular path."
+    ],
+    "problem_exploring": [
+      "Encourage reasoning about relationships between variables or observed patterns.",
+      "A good inquiry probes one main conceptual relationship at a time.",
+      "Invite students to reason about why speed can be constant while acceleration is nonzero.",
+      "Ask students to identify what real force supplies the centripetal force in the context."
+    ],
+    "problem_generating": [
+      "The generated problem must use evidence from both the graph and the image.",
+      "The final output should be a solvable physics problem, not a reflection question.",
+      "The problem may ask students to infer speed, acceleration, or force from radius and period data."
+    ]
+  },
+  "difficulty_rules": {
+    "easy": [
+      "Use one-step reasoning with explicit quantities.",
+      "Prefer direct substitution or identification of one relationship.",
+      "Use direct formulas such as a_c = v^2 / r or F_c = m v^2 / r."
+    ],
+    "intermediate": [
+      "Ask for comparison between two conditions or moderate interpretation of data.",
+      "Combine observation from the image with one graph pattern.",
+      "Allow conversion between period and speed using v = 2pi r / T."
+    ],
+    "advanced": [
+      "Allow multistep reasoning, uncertainty, or justification using more than one variable.",
+      "Expect stronger integration of graph evidence and physical interpretation.",
+      "Require identifying the source of centripetal force and separating it from misconceptions about outward force."
+    ]
+  },
+  "misconceptions_by_stage": {
+    "problem_finding": [
+      "Students may confuse any spinning-looking object with true circular motion examples."
+    ],
+    "problem_exploring": [
+      "Constant speed does not mean zero acceleration in circular motion.",
+      "Velocity direction and centripetal acceleration direction should not be treated as the same vector.",
+      "Students may think an outward force is required to keep an object moving in a circle.",
+      "Students may confuse centripetal force with centrifugal force."
+    ],
+    "problem_generating": [
+      "The problem should not ignore one of the two visual inputs.",
+      "Avoid asking for an answer that cannot be supported by the provided graph or image.",
+      "Do not treat centripetal force as a separate physical interaction without specifying its source such as tension, gravity, or friction."
+    ]
+  },
+  "source_notes": {
+    "added_from_libretexts": [
+      "Uniform circular motion keeps speed constant but changes velocity direction.",
+      "Centripetal acceleration formulas include a_c = v^2/r and a_c = 4pi^2 r/T^2.",
+      "Linear speed in circular motion can be written as v = 2pi r/T.",
+      "Centripetal force formulas include F_c = m v^2/r and F_c = 4pi^2 r m/T^2.",
+      "Gravity, tension, and friction can act as centripetal force depending on the context.",
+      "Centrifugal force is commonly misunderstood and should be handled as an apparent force idea, not the real inward cause in an inertial frame."
+    ]
+  }
+}

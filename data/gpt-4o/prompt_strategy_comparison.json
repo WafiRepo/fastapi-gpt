@@ -1,0 +1,22 @@
+{
+  "few_shot__kg": {
+    "bleu1_mean": 41.85918352206535,
+    "bleu4_mean": 11.422393845484683,
+    "rouge1_mean": 0.3901656002142473,
+    "rouge2_mean": 0.168108699945811,
+    "rougeL_mean": 0.31037826983469596,
+    "bertscore_f1_mean": 0.8996027278900146,
+    "geval_overall_mean": 4.192,
+    "count": 25
+  },
+  "few_shot__none": {
+    "bleu1_mean": 44.09502911147316,
+    "bleu4_mean": 12.82421404918316,
+    "rouge1_mean": 0.4013056771649304,
+    "rouge2_mean": 0.17616274353632075,
+    "rougeL_mean": 0.3221944114025149,
+    "bertscore_f1_mean": 0.8966842770576477,
+    "geval_overall_mean": 4.16,
+    "count": 25
+  }
+}
