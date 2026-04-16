@@ -8,6 +8,9 @@ Sumber gambar (berurutan):
 Autentikasi: header Authorization: Bearer (Firebase ID token). User harus
 ada di Firestore koleksi user dengan role admin (sama seperti portal admin web).
 
+Parameter ``force_overwrite`` (body JSON): jika True, dokumen yang sudah punya
+semua questionImageUrl* tetap diproses dan URL/path diganti (base64 dulu, lalu MySQL).
+
 Lingkungan wajib:
 - GOOGLE_APPLICATION_CREDENTIALS atau FIREBASE_CREDENTIALS_PATH — JSON service account
 - FIREBASE_STORAGE_BUCKET — default gphysolve.firebasestorage.app
@@ -373,6 +376,10 @@ class V2RecordBackfillRequest(BaseModel):
     user_id: str = Field(..., description="Firebase idCustomer / UID pemilik record")
     limit: int = Field(40, ge=1, le=200)
     dry_run: bool = Field(False)
+    force_overwrite: bool = Field(
+        False,
+        description="Jika True: timpa questionImageUrl* yang sudah ada (base64 + MySQL). Default False = hanya isi slot kosong.",
+    )
     regenerate_from_mysql: bool = Field(
         True,
         description="Jika masih ada slot kosong, coba plot dari data_buffer (timestamp terdekat).",
@@ -423,12 +430,15 @@ def _doc_missing_any_url(data: Dict[str, Any]) -> bool:
 def _next_missing_slot(
     data: Dict[str, Any],
     slot_urls: Dict[int, str],
+    *,
+    force_overwrite: bool = False,
 ) -> Optional[int]:
+    """Slot berikutnya untuk diisi. Jika force_overwrite, abaikan URL yang sudah ada di data (kecuali slot sudah diisi di run ini)."""
     for i in range(5):
-        if _is_http_url(data.get(URL_FIELDS[i])):
-            continue
         slot = i + 1
         if slot in slot_urls:
+            continue
+        if not force_overwrite and _is_http_url(data.get(URL_FIELDS[i])):
             continue
         return slot
     return None
@@ -444,6 +454,7 @@ def _apply_mysql_plots(
     slot_urls: Dict[int, str],
     slot_paths: Dict[int, str],
     errors: List[Dict[str, Any]],
+    force_overwrite: bool = False,
 ) -> None:
     t = buf.get("t") or []
     acc = buf.get("acc")
@@ -457,7 +468,7 @@ def _apply_mysql_plots(
     for series, ttl, ylab in charts:
         if not series or len(t) < 2:
             continue
-        slot = _next_missing_slot(data, slot_urls)
+        slot = _next_missing_slot(data, slot_urls, force_overwrite=force_overwrite)
         if slot is None:
             break
         tx, yx = _align_xy(t, series)
@@ -472,7 +483,7 @@ def _apply_mysql_plots(
         except Exception as e:
             errors.append({"doc": doc_id, "slot": slot, "phase": "mysql_plot", "error": str(e)})
 
-    slot = _next_missing_slot(data, slot_urls)
+    slot = _next_missing_slot(data, slot_urls, force_overwrite=force_overwrite)
     if slot is not None and acc and t:
         tx, yx = _align_xy(t, acc)
         if len(yx) >= 3:
@@ -489,7 +500,7 @@ def _apply_mysql_plots(
                 except Exception as e:
                     errors.append({"doc": doc_id, "slot": slot, "phase": "mysql_table", "error": str(e)})
 
-    slot = _next_missing_slot(data, slot_urls)
+    slot = _next_missing_slot(data, slot_urls, force_overwrite=force_overwrite)
     if slot is not None and gyr and t:
         tx, yx = _align_xy(t, gyr)
         if len(yx) >= 3:
@@ -541,7 +552,7 @@ def backfill_v2_record_images(
         doc_id = doc.id
         data = dict(doc.to_dict() or {})
 
-        if not _doc_missing_any_url(data):
+        if not body.force_overwrite and not _doc_missing_any_url(data):
             skipped += 1
             details.append({"id": doc_id, "status": "skip", "reason": "urls_already_set"})
             continue
@@ -554,7 +565,7 @@ def backfill_v2_record_images(
             slot = i + 1
             url_key = URL_FIELDS[i]
             b64_key = BASE64_FIELDS[i]
-            if _is_http_url(data.get(url_key)):
+            if _is_http_url(data.get(url_key)) and not body.force_overwrite:
                 continue
             raw_b64 = data.get(b64_key)
             if raw_b64 and str(raw_b64).strip():
@@ -588,6 +599,7 @@ def backfill_v2_record_images(
                     slot_urls=slot_urls,
                     slot_paths=slot_paths,
                     errors=errors,
+                    force_overwrite=body.force_overwrite,
                 )
 
         for slot, u in slot_urls.items():
@@ -641,6 +653,7 @@ def backfill_v2_record_images(
         "updated": updated,
         "skipped": skipped,
         "dry_run": body.dry_run,
+        "force_overwrite": body.force_overwrite,
         "mysql_buffer_batches": len(buffer_groups) if buffer_groups is not None else 0,
         "details": details[:80],
         "errors": errors[:50],
