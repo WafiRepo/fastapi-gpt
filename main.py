@@ -1,10 +1,12 @@
 # main.py
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 # from routes import router
 from router_analyze_data import router_analyze_data
 from router_process_image import router_process_image
 from router_inquiry import router_inquiry
+from router_admin_v2_record import router_admin_v2_record
 from routes_easy import routes_easy
 from routes_intermediate import routes_intermediate
 from routes_advance import routes_advance
@@ -13,6 +15,16 @@ import uvicorn
 import os
 
 app = FastAPI()
+
+_cors_origins = [o.strip() for o in os.getenv("CORS_ALLOW_ORIGINS", "*").split(",") if o.strip()] or ["*"]
+_cors_cred = "*" not in _cors_origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_cors_origins,
+    allow_credentials=_cors_cred,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Create evaluation_plot directory if it doesn't exist
 evaluation_plot_dir = "evaluation_plot"
@@ -26,6 +38,7 @@ app.mount("/evaluation_plot", StaticFiles(directory="evaluation_plot"), name="ev
 app.include_router(router_analyze_data)
 app.include_router(router_process_image)
 app.include_router(router_inquiry)
+app.include_router(router_admin_v2_record)
 app.include_router(routes_easy)
 app.include_router(routes_intermediate)
 app.include_router(routes_advance)

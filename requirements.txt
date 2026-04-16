@@ -17,3 +17,5 @@ mysql-connector-python
 python-multipart
 opencv-python
 requests
+firebase-admin
+Pillow
