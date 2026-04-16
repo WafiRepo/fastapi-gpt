@@ -3,7 +3,9 @@ Admin API: backfill questionImageUrl/Path untuk koleksi Firestore **v2_record** 
 
 Sumber gambar (berurutan):
 1) Field legacy base64 / base64_2 .. base64_5 di dokumen → unggah ke Storage.
-2) Opsional: regenerasi sederhana dari MySQL data_buffer (t, acc, gyr, gyr_squared) jika masih kosong.
+2) Opsional: regenerasi dari MySQL data_buffer (t, acc, gyr, gyr_squared). Default: ambil snapshot
+   waktu **terdekat** waktu dokumen (`createdAt` / `dateTime` / ID dokumen = millis), bukan buffer terakhir
+   yang sama untuk semua record. Mode legacy masih tersedia lewat `mysql_buffer_pick`.
 
 Autentikasi: header Authorization: Bearer (Firebase ID token). User harus
 ada di Firestore koleksi user dengan role admin (sama seperti portal admin web).
@@ -29,7 +31,7 @@ import time
 import urllib.parse
 import uuid
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Literal, Optional, Tuple
 
 from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel, Field
@@ -228,6 +230,11 @@ def _parse_doc_time(data: Dict[str, Any]) -> Optional[datetime]:
                 if ts > 1e12:
                     ts = ts / 1000.0
                 return datetime.utcfromtimestamp(ts)
+            # Firestore REST / dict-shaped timestamp
+            if isinstance(ca, dict):
+                sec = ca.get("seconds") or ca.get("_seconds")
+                if sec is not None:
+                    return datetime.utcfromtimestamp(float(sec))
         except Exception:
             pass
     dt = data.get("dateTime")
@@ -238,6 +245,27 @@ def _parse_doc_time(data: Dict[str, Any]) -> Optional[datetime]:
             except ValueError:
                 continue
     return None
+
+
+def _parse_doc_id_as_millis(doc_id: str) -> Optional[datetime]:
+    """ID dokumen dari app sering berupa System.currentTimeMillis() (13 digit)."""
+    if not doc_id or not str(doc_id).isdigit():
+        return None
+    try:
+        ms = int(doc_id)
+    except ValueError:
+        return None
+    if ms < 1_000_000_000_000:  # ~2001 in ms; avoid treating short ids as ms
+        return None
+    return datetime.utcfromtimestamp(ms / 1000.0)
+
+
+def _resolve_record_target_time(data: Dict[str, Any], doc_id: str) -> Optional[datetime]:
+    """Waktu acuan untuk memilih snapshot data_buffer: createdAt/dateTime, lalu doc_id millis."""
+    t = _parse_doc_time(data)
+    if t is not None:
+        return t
+    return _parse_doc_id_as_millis(doc_id)
 
 
 def _group_buffers_by_timestamp(user_id: str) -> List[Tuple[datetime, Dict[str, Any]]]:
@@ -304,6 +332,7 @@ def _group_buffers_by_timestamp(user_id: str) -> List[Tuple[datetime, Dict[str, 
 def _nearest_buffer(
     groups: List[Tuple[datetime, Dict[str, Any]]], target: Optional[datetime], max_delta_sec: int = 300
 ) -> Optional[Dict[str, Any]]:
+    """Pilih buffer dengan delta terkecil; hanya terima jika delta <= max_delta_sec."""
     if not target or not groups:
         return None
     best = None
@@ -316,6 +345,25 @@ def _nearest_buffer(
     if best is None or best_d is None or best_d > max_delta_sec:
         return None
     return best
+
+
+def _closest_buffer_group(
+    groups: List[Tuple[datetime, Dict[str, Any]]], target: Optional[datetime]
+) -> Tuple[Optional[Dict[str, Any]], Optional[float]]:
+    """
+    Selalu pilih grup snapshot yang paling dekat dengan target (tanpa batas jarak).
+    Membedakan record yang berbeda waktu ketika ada beberapa batch di MySQL.
+    """
+    if not target or not groups:
+        return None, None
+    best_g = None
+    best_d = None
+    for ts, g in groups:
+        delta = abs((ts - target).total_seconds())
+        if best_d is None or delta < best_d:
+            best_d = delta
+            best_g = g
+    return best_g, best_d
 
 
 def _align_xy(t: List[float], y: List[float]) -> Tuple[List[float], List[float]]:
@@ -385,6 +433,15 @@ class V2RecordBackfillRequest(BaseModel):
         description="Jika masih ada slot kosong, coba plot dari data_buffer (timestamp terdekat).",
     )
     mysql_time_window_sec: int = Field(300, ge=30, le=3600)
+    mysql_buffer_pick: Literal["closest_by_time", "strict_window_only", "legacy_same_latest_for_all"] = Field(
+        "closest_by_time",
+        description=(
+            "closest_by_time: pilih snapshot data_buffer yang paling dekat waktu dokumen (disarankan; "
+            "tiap record beda jika ada banyak batch). "
+            "strict_window_only: hanya jika delta <= mysql_time_window_sec. "
+            "legacy_same_latest_for_all: perilaku lama — pakai buffer terakhir jika tidak match (sering bikin gambar sama)."
+        ),
+    )
 
 
 class V2RecordPreviewRequest(BaseModel):
@@ -560,6 +617,7 @@ def backfill_v2_record_images(
         updates: Dict[str, Any] = {}
         slot_urls: Dict[int, str] = {}
         slot_paths: Dict[int, str] = {}
+        mysql_pick_note: Optional[Dict[str, Any]] = None
 
         for i in range(5):
             slot = i + 1
@@ -583,12 +641,34 @@ def backfill_v2_record_images(
                         errors.append({"doc": doc_id, "slot": slot, "phase": "base64", "error": str(e)})
 
         if body.regenerate_from_mysql and buffer_groups and not body.dry_run:
-            target_time = _parse_doc_time(data)
+            target_time = _resolve_record_target_time(data, doc_id)
             buf: Optional[Dict[str, Any]] = None
-            if target_time is not None:
-                buf = _nearest_buffer(buffer_groups, target_time, body.mysql_time_window_sec)
-            if buf is None and buffer_groups:
-                buf = buffer_groups[-1][1]
+            if target_time is not None and buffer_groups:
+                if body.mysql_buffer_pick == "strict_window_only":
+                    buf = _nearest_buffer(buffer_groups, target_time, body.mysql_time_window_sec)
+                    mysql_pick_note = {
+                        "mode": "strict_window_only",
+                        "target_utc": target_time.isoformat() + "Z",
+                    }
+                elif body.mysql_buffer_pick == "legacy_same_latest_for_all":
+                    buf = _nearest_buffer(buffer_groups, target_time, body.mysql_time_window_sec)
+                    used_latest_fallback = False
+                    if buf is None and buffer_groups:
+                        buf = buffer_groups[-1][1]
+                        used_latest_fallback = True
+                    mysql_pick_note = {
+                        "mode": "legacy_same_latest_for_all",
+                        "target_utc": target_time.isoformat() + "Z",
+                        "used_latest_fallback": used_latest_fallback,
+                    }
+                else:
+                    # default: closest_by_time — tiap dokumen dapat snapshot terdekat (bukan buffer terakhir semua)
+                    buf, delta_sec = _closest_buffer_group(buffer_groups, target_time)
+                    mysql_pick_note = {
+                        "mode": "closest_by_time",
+                        "target_utc": target_time.isoformat() + "Z",
+                        "delta_sec_to_snapshot": round(delta_sec, 3) if delta_sec is not None else None,
+                    }
             if buf:
                 _apply_mysql_plots(
                     data=data,
@@ -626,13 +706,14 @@ def backfill_v2_record_images(
             try:
                 db.collection(V2_RECORD).document(doc_id).update(updates)
                 updated += 1
-                details.append(
-                    {
-                        "id": doc_id,
-                        "status": "updated",
-                        "fields": list(updates.keys()),
-                    }
-                )
+                detail_updated: Dict[str, Any] = {
+                    "id": doc_id,
+                    "status": "updated",
+                    "fields": list(updates.keys()),
+                }
+                if mysql_pick_note:
+                    detail_updated["mysql_pick"] = mysql_pick_note
+                details.append(detail_updated)
             except Exception as e:
                 errors.append({"doc": doc_id, "phase": "firestore", "error": str(e)})
                 details.append({"id": doc_id, "status": "error", "error": str(e)})
@@ -654,6 +735,7 @@ def backfill_v2_record_images(
         "skipped": skipped,
         "dry_run": body.dry_run,
         "force_overwrite": body.force_overwrite,
+        "mysql_buffer_pick": body.mysql_buffer_pick,
         "mysql_buffer_batches": len(buffer_groups) if buffer_groups is not None else 0,
         "details": details[:80],
         "errors": errors[:50],
