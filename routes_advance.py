@@ -584,8 +584,10 @@ def generate_advanced_question(
     elif label1:
         prefix += f"Object detected in the experiment: {label1}.\n"
     if latest_radius is not None and second_latest_radius is not None:
-        radius1_cm = latest_radius * 100
-        radius2_cm = second_latest_radius * 100
+        # calculated_radius.radius dalam cm (sesuai routes_radius.replace-radius).
+        # Jangan * 100 — nilai cm di DB (mis. 40) akan jadi 4000 cm di prompt.
+        radius1_cm = float(latest_radius)
+        radius2_cm = float(second_latest_radius)
         prefix += f"Experiment 1 has a radius of {radius1_cm:.2f} cm, and Experiment 2 has a radius of {radius2_cm:.2f} cm.\n"
 
     # Initialize placeholders
