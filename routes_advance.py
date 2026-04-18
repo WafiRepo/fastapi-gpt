@@ -565,12 +565,12 @@ def generate_advanced_question(
     # NOW we have 6 question types to choose from:
     # ----------------------------------------------------------------
     question_types = [
-        # "text+table",
-        # "text+graph",
-        # "text+image",
+        "text+table",
+        "text+graph",
+        "text+image",
         "text+table+image",
         "text+table+graph",
-        # "text+graph+image"
+        "text+graph+image"
     ]
     selected_type = random.choice(question_types)
     logger.info(f"Selected question type: {selected_type}")
