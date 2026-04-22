@@ -27,6 +27,13 @@ import openai
 
 from router_analyze_data import get_db_connection
 from few_shot_pdf_path import resolve_few_shot_pdf_path
+from sensor_buffer_utils import (
+    get_aligned_acc_gyr_t,
+    get_radius_for_buffer_session,
+    COL_ACC,
+    COL_OMEGA,
+    COL_TIME,
+)
 
 # --------------------------------------------------------
 # Initialize Router
@@ -494,7 +501,7 @@ def generate_easy_question(
     # 6) Construct prefix
     prefix = f"Object detected: {object_detected}. " if object_detected else ""
     if latest_radius is not None:
-        prefix += f"Latest radius: {latest_radius} cm.\n"
+        prefix += f"Latest radius: {float(latest_radius):.2f} cm.\n"
 
     # Initialize placeholders
     table_interpretation = None
@@ -544,8 +551,10 @@ def generate_easy_question(
         try:
             # Label dua baris
             col_labels = [
-                col.replace('Centripetal Acceleration (a) (m/s^2)', 'Centripetal\nAcceleration (a) (m/s^2)')
-                   .replace('Angular velocity (ω) rad/s', 'Angular\nvelocity (ω) rad/s')
+                col.replace(
+                    COL_ACC,
+                    'Centripetal\nAcceleration (a) m/s^2',
+                ).replace('Angular velocity (ω) rad/s', 'Angular\nvelocity (ω) rad/s')
                 for col in df.columns
             ]
             # Hitung lebar kolom otomatis
@@ -762,23 +771,21 @@ async def easy_question(request: QuestionRequest):
             logger.error("No label in DB.")
             raise HTTPException(status_code=500, detail="No label found.")
 
-        acc_data = get_latest_buffer_data('acc', user_id)
-        gyr_data = get_latest_buffer_data('gyr', user_id)
-        t_data = get_latest_buffer_data('t', user_id)
-        if not acc_data or not gyr_data or not t_data:
-            logger.error("Missing buffer data for acc/gyr/t.")
+        aligned = get_aligned_acc_gyr_t(user_id)
+        if not aligned:
+            logger.error("Missing or misaligned buffer data for acc/gyr/t.")
             raise HTTPException(status_code=500, detail="Data not found in DB.")
 
-        radius_val = get_latest_radius(user_id)
+        radius_val = get_radius_for_buffer_session(user_id, aligned.get("buffer_ts"))
         if radius_val is None:
             logger.error("No radius in DB.")
             raise HTTPException(status_code=500, detail="No radius found in DB.")
 
-        # Build DataFrame
+        # Build DataFrame (nama kolom harus match y_axis_options, termasuk percepatan)
         df = pd.DataFrame({
-            "Time (s)": t_data["data"],
-            "Angular velocity (ω) rad/s": gyr_data["data"],
-            "Centripetal Acceleration (a) (m/s^2)": acc_data["data"]
+            COL_TIME: aligned["t"],
+            COL_OMEGA: aligned["gyr"],
+            COL_ACC: aligned["acc"],
         })
         logger.info(f"DataFrame:\n{df}")
 

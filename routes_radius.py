@@ -87,11 +87,11 @@ async def calculate_radius_auto(user_id: str = Query(..., description="User ID")
     if avg_gyr_squared == 0:
         raise HTTPException(status_code=400, detail="Gyroscope squared average is zero, cannot divide by zero.")
     
-    radius = avg_acc / avg_gyr_squared
-    # radius = radius * 100  # konversi meter ke centimeter
-    radius = round(radius, 2)
+    # a dalam m/s², ω² dalam (rad/s)²  →  r = a/ω² dalam meter; simpan & API prompt dalam centimeter
+    radius_m = avg_acc / avg_gyr_squared
+    radius = round(radius_m * 100.0, 2)
     
-    logger.info(f"Calculated radius: {radius}")
+    logger.info(f"Calculated radius: {radius} cm (from r_m={radius_m:.4f} m)")
     
     # Validasi nilai radius sebelum menyimpan ke database
     if np.isnan(radius) or np.isinf(radius):
