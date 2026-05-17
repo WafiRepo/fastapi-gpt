@@ -1,9 +1,10 @@
 # =============================================================================
 # fastapi-gpt/.gitignore
-# Filosofi: hanya source code (router_*.py, routes_*.py, main.py, util .py,
-# requirements.txt, prompt template di data/, dokumentasi *.md, dan asset
-# manual yang dipakai pengujian) yang di-commit. Semua artefak runtime,
-# output evaluasi, secrets, dan binary besar di-ignore.
+# Filosofi: HANYA file yang dibutuhkan FastAPI router runtime yang di-track.
+# Yang di-ignore: secrets, output runtime, SEMUA file/folder evaluasi (script,
+# data, plot, laporan), SEMUA *.md dokumentasi, dan binary besar.
+# Pengecualian: data/prompts/*.md dipertahankan karena router_inquiry.py
+# membacanya saat runtime (PROMPTS_DIR).
 # =============================================================================
 
 # ---------- Python ----------
@@ -48,10 +49,8 @@ Miniconda3-latest-Linux-x86_64.sh
 !.env.example
 *firebase-adminsdk*.json
 serviceAccount*.json
-# Service-account key Firebase memakai nama proyek sebagai prefix
 phyphox-*.json
 gphysolve-*.json
-# Token / API key dalam bentuk teks
 github token.txt
 *github*token*.txt
 *api_key*.txt
@@ -61,34 +60,8 @@ github token.txt
 *.key
 
 # =============================================================================
-# Output evaluasi & artefak yang dihasilkan oleh script (bukan source code)
-# =============================================================================
-# Hasil run eval_inquiry_metrics.py / generate_and_evaluate*.py di root fastapi-gpt
-eval_results.csv
-eval_results.jsonl
-eval_results.xlsx
-eval2.jsonl
-eval2_results.csv
-eval2_results.jsonl
-eval2.xlsx
-eval plot*.xlsx
-eval_plots/
-
-# Plot tambahan / spreadsheet ad-hoc di root
-*.xlsx
-
-# Hasil ablation study problem-finder
-ablation/ablation_pf.jsonl
-ablation/ablation_results.csv
-ablation/ablation_results.jsonl
-ablation/eval_plots/
-ablation/Ablation_PF_Report.pdf
-ablation/__pycache__/
-
-# =============================================================================
-# Folder output runtime (gambar, grafik, log, data sensor) — dibuat oleh router
-# saat dijalankan; isinya berupa hasil per-user, bukan source code.
-# Jika ingin menjaga struktur folder, tambahkan .gitkeep manual lalu commit.
+# Folder OUTPUT runtime router (gambar, grafik, log, sensor data, table)
+# Folder akan dibuat ulang oleh router saat dijalankan.
 # =============================================================================
 log_file/
 raw_sensor_data/
@@ -98,10 +71,71 @@ table_images/
 advance_graph/
 easy_graph/
 intermediate_graph/
-evaluation_plot/
 
 # =============================================================================
-# Dump database / data set besar — bukan bagian dari router
+# EVALUASI — script, folder, output, laporan. Tidak ada satupun yang di-track.
+# =============================================================================
+# Script evaluasi/ablation/plot (di root fastapi-gpt)
+eval_inquiry_metrics.py
+export_inquiry_logs_for_eval.py
+generate_and_evaluate.py
+generate_and_evaluate_complete.py
+gen_ablation_problem_finder.py
+plot_ablation.py
+plot_eval_results.py
+plot_from_results.py
+convert_excel_to_jsonl.py
+houghtest.py
+test_connection.py
+
+# Folder evaluasi (lengkap dengan isinya)
+ablation/
+references/
+eval_plots/
+evaluation_plot/
+
+# Output evaluasi di root fastapi-gpt
+eval_results.csv
+eval_results.jsonl
+eval_results.xlsx
+eval2.jsonl
+eval2_results.csv
+eval2_results.jsonl
+eval2.xlsx
+eval plot*.xlsx
+*.xlsx
+
+# Output evaluasi di data/ (hanya output, BUKAN prompts/testsets/knowledge_graphs)
+data/augmented_questions.xlsx
+data/evaluation_results*
+data/few_shot_*
+data/final.xlsx
+data/inquiry_samples*
+data/knowledge_mode_summary.json
+data/model_*summary*.json
+data/prompt_strategy_comparison.json
+
+# Per-model evaluation output folders di data/
+data/google_*/
+data/gpt-*/
+data/openai_*/
+data/qwen*/
+data/qwen_*/
+
+# =============================================================================
+# Markdown dokumentasi — TIDAK di-track
+# Pengecualian eksplisit: prompt template yang dimuat runtime oleh
+# router_inquiry.py (PROMPTS_DIR / f"{prompt_type}.md"). README/STRUCTURE
+# di data/prompts/ tetap di-ignore karena hanya dokumentasi.
+# =============================================================================
+*.md
+!data/prompts/zero_shot.md
+!data/prompts/few_shot.md
+!data/prompts/cot.md
+!data/prompts/draft_critique_revise.md
+
+# =============================================================================
+# Dump database / dataset besar
 # =============================================================================
 *.sql
 *.sqlite
@@ -109,23 +143,11 @@ evaluation_plot/
 *.db
 
 # =============================================================================
-# Dokumen referensi / brainstorming (PDF/DOCX) yang tidak diimpor router
+# Dokumen non-kode (PDF/DOCX brainstorming, guide, laporan)
 # =============================================================================
 Brainstorming*.pdf
 *guide*.pdf
 *guide*.docx
 *.docx.pdf
 llama_server_guide*
-
-# Laporan PDF yang dibuat ulang lewat script (Ablation_PF_Report.pdf sudah di atas)
-# Tambahkan pola lain di sini jika ada laporan generate-able.
-
-# =============================================================================
-# Folder data/ dipertahankan (berisi prompt template & testset yang dibaca
-# router_inquiry.py). Jika ada subfolder model-specific yang besar (mis. hasil
-# inferensi) tambahkan pengecualian di bawah ini.
-# =============================================================================
-# data/<model>/inquiry_samples_all_strategies.{csv,jsonl}  ← jika ingin di-ignore,
-# aktifkan baris berikut:
-# data/*/inquiry_samples_all_strategies.csv
-# data/*/inquiry_samples_all_strategies.jsonl
+*Report*.pdf
