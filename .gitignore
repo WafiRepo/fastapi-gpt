@@ -1,17 +1,131 @@
-.env
-*firebase-adminsdk*.json
-serviceAccount*.json
+# =============================================================================
+# fastapi-gpt/.gitignore
+# Filosofi: hanya source code (router_*.py, routes_*.py, main.py, util .py,
+# requirements.txt, prompt template di data/, dokumentasi *.md, dan asset
+# manual yang dipakai pengujian) yang di-commit. Semua artefak runtime,
+# output evaluasi, secrets, dan binary besar di-ignore.
+# =============================================================================
+
+# ---------- Python ----------
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---------- Virtual environments ----------
 venv/
 env/
+.venv/
+
+# ---------- IDE / Editor / OS ----------
 .vscode/
 .idea/
 *.tmp
+*.swp
+*.bak
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Native binaries / installers (bukan bagian dari router) ----------
 lib/
 *.dylib
+*.so
+*.dll
 *.sh
 Miniconda3-latest-Linux-x86_64.sh
-*.sh
-Miniconda3-latest-Linux-x86_64.sh
-*.sh
+
+# =============================================================================
+# SECRETS — JANGAN PERNAH DI-COMMIT
+# =============================================================================
+.env
+.env.*
+!.env.example
+*firebase-adminsdk*.json
+serviceAccount*.json
+# Service-account key Firebase memakai nama proyek sebagai prefix
+phyphox-*.json
+gphysolve-*.json
+# Token / API key dalam bentuk teks
+github token.txt
+*github*token*.txt
+*api_key*.txt
+*api-key*.txt
+*secret*.txt
+*.pem
+*.key
+
+# =============================================================================
+# Output evaluasi & artefak yang dihasilkan oleh script (bukan source code)
+# =============================================================================
+# Hasil run eval_inquiry_metrics.py / generate_and_evaluate*.py di root fastapi-gpt
+eval_results.csv
+eval_results.jsonl
+eval_results.xlsx
+eval2.jsonl
+eval2_results.csv
+eval2_results.jsonl
+eval2.xlsx
+eval plot*.xlsx
+eval_plots/
+
+# Plot tambahan / spreadsheet ad-hoc di root
+*.xlsx
+
+# Hasil ablation study problem-finder
+ablation/ablation_pf.jsonl
+ablation/ablation_results.csv
+ablation/ablation_results.jsonl
+ablation/eval_plots/
+ablation/Ablation_PF_Report.pdf
+ablation/__pycache__/
+
+# =============================================================================
+# Folder output runtime (gambar, grafik, log, data sensor) — dibuat oleh router
+# saat dijalankan; isinya berupa hasil per-user, bukan source code.
+# Jika ingin menjaga struktur folder, tambahkan .gitkeep manual lalu commit.
+# =============================================================================
+log_file/
+raw_sensor_data/
+image_raw/
+image_result/
+table_images/
+advance_graph/
+easy_graph/
+intermediate_graph/
+evaluation_plot/
+
+# =============================================================================
+# Dump database / data set besar — bukan bagian dari router
+# =============================================================================
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# =============================================================================
+# Dokumen referensi / brainstorming (PDF/DOCX) yang tidak diimpor router
+# =============================================================================
+Brainstorming*.pdf
+*guide*.pdf
+*guide*.docx
+*.docx.pdf
+llama_server_guide*
+
+# Laporan PDF yang dibuat ulang lewat script (Ablation_PF_Report.pdf sudah di atas)
+# Tambahkan pola lain di sini jika ada laporan generate-able.
+
+# =============================================================================
+# Folder data/ dipertahankan (berisi prompt template & testset yang dibaca
+# router_inquiry.py). Jika ada subfolder model-specific yang besar (mis. hasil
+# inferensi) tambahkan pengecualian di bawah ini.
+# =============================================================================
+# data/<model>/inquiry_samples_all_strategies.{csv,jsonl}  ← jika ingin di-ignore,
+# aktifkan baris berikut:
+# data/*/inquiry_samples_all_strategies.csv
+# data/*/inquiry_samples_all_strategies.jsonl
