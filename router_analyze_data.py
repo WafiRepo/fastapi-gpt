@@ -22,6 +22,7 @@ router_analyze_data = APIRouter()
 # Database model
 class BufferData(BaseModel):
     user_id: str
+    device_id: int = 1
     acc: List[float] = []
     gyr: List[float] = []
     gyr_squared: List[float] = []
@@ -58,19 +59,20 @@ async def add_buffer_data(data: BufferData):
         # Round each value in the lists to 2 decimal places before insertion
         data_dict = data.dict()
         user_id = data_dict.pop("user_id")
+        device_id = data_dict.pop("device_id", 1)
         for buffer_name, buffer_data in data_dict.items():
             if buffer_data:
                 # Round each value in the buffer_data to 2 decimal places
-                rounded_data = [round(value, 2) for value in buffer_data]  
+                rounded_data = [round(value, 2) for value in buffer_data]
 
                 # Convert to JSON format
                 data_json = json.dumps({"data": rounded_data})
-                print(f"Inserting buffer: {buffer_name} with data: {data_json} for user: {user_id}")  # Log the data
+                print(f"Inserting buffer: {buffer_name} with data: {data_json} for user: {user_id} device: {device_id}")
 
                 # Insert into the database
                 cursor.execute(
-                    "INSERT INTO data_buffer (user_id, buffer_name, data) VALUES (%s, %s, %s)",
-                    (user_id, buffer_name, data_json)
+                    "INSERT INTO data_buffer (user_id, device_id, buffer_name, data) VALUES (%s, %s, %s, %s)",
+                    (user_id, device_id, buffer_name, data_json)
                 )
         connection.commit()
         return {"message": "Buffer data added successfully"}

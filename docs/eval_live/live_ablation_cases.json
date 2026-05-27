@@ -1,0 +1,1413 @@
+{
+  "stage": "problem_finding",
+  "lang": "id",
+  "source": "firestore_inquiry_logs",
+  "items": [
+    {
+      "id": "LIVE-001",
+      "firestore_doc_id": "005VcoJO4WI9U1oyeeb4",
+      "idCustomer": "LHrL9MyHqQZXEhnn7rfomaegVYZ2",
+      "object_label": "roda sepeda",
+      "object_label_id": "roda sepeda",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776906105359?alt=media&token=303bee09-f20a-4a46-a602-b0543992eb13",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumah yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada roda sepeda di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada roda sepeda di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada roda sepeda?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-23T01:01:50.631000+00:00"
+    },
+    {
+      "id": "LIVE-002",
+      "firestore_doc_id": "0Uf67ucpWdqGYXcl5THH",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776481807746?alt=media&token=1ac1b2e5-0559-4a34-95b4-6b7d7692320b",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di sekitar playground yang berputar atau bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T03:10:12.952000+00:00"
+    },
+    {
+      "id": "LIVE-003",
+      "firestore_doc_id": "0WSC0blrFAkGUc0Btin4",
+      "idCustomer": "ZJZXYpGqKzVsox8VmOUYnlBwYPb2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Lokasi tidak diisi",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776221554988?alt=media&token=fc6b6369-f2b0-44ee-9989-d85e56e71cb9",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di sekitarmu yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di lingkungan sekitar?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di lingkungan sekitar?",
+        "Bagaimana gerakan melingkar pada objek ini di lingkungan sekitar menunjukkan (a)?",
+        "Di lingkungan sekitar, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di lingkungan sekitar, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T02:52:42.725000+00:00"
+    },
+    {
+      "id": "LIVE-004",
+      "firestore_doc_id": "1jsCKWWjIbKCKIcPhTIe",
+      "idCustomer": "oB9jc5sZRHeYaRfBNA0uuzUk3UV2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776515744359?alt=media&token=b55d4209-3700-4511-a309-333851f511dd",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di playground yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T12:35:50.306000+00:00"
+    },
+    {
+      "id": "LIVE-005",
+      "firestore_doc_id": "1shzB3mlsVBQw1mrQnBM",
+      "idCustomer": "Kxojnxk3DTXfILMiJCDsZwh5S3O2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776867067443?alt=media&token=fcf5025e-630a-49e5-b2ef-39106c245673",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di rumah yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-22T14:11:12.724000+00:00"
+    },
+    {
+      "id": "LIVE-006",
+      "firestore_doc_id": "2ryEiCbudBbtacDDm9Zq",
+      "idCustomer": "LHrL9MyHqQZXEhnn7rfomaegVYZ2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776905815856?alt=media&token=ce23e6a8-39e9-4bc6-8759-2236004e6764",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-23T00:57:05.112000+00:00"
+    },
+    {
+      "id": "LIVE-007",
+      "firestore_doc_id": "3QRyydJ2GaS0LUg6nU8l",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776149930185?alt=media&token=cf1749cc-c449-45c7-b838-ca2adef96292",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-14T06:58:58.085000+00:00"
+    },
+    {
+      "id": "LIVE-008",
+      "firestore_doc_id": "3jd1YsG63oR8gwauNSW8",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776740832075?alt=media&token=c44c255c-1b02-454e-8b61-e96cfeab4dea",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T03:07:20.556000+00:00"
+    },
+    {
+      "id": "LIVE-009",
+      "firestore_doc_id": "3l0frrGff7DeAATiXZ8h",
+      "idCustomer": "OqI8LK6KBdQtmLn4yKye1ZRekk13",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776737027734?alt=media&token=6d697dcb-f24b-4632-a15c-135979a18511",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T02:03:54.276000+00:00"
+    },
+    {
+      "id": "LIVE-010",
+      "firestore_doc_id": "4UQNrRud8Z3wiSatWLV4",
+      "idCustomer": "59wY1KaCbNYHvAUecjI6mLgdIk73",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776148476440?alt=media&token=0ee85a10-e2ba-4f93-9590-da96ac69b82f",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di sekitar playground yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-14T06:34:42.881000+00:00"
+    },
+    {
+      "id": "LIVE-011",
+      "firestore_doc_id": "5dc91FcSHH2JuANTzUCf",
+      "idCustomer": "OqI8LK6KBdQtmLn4yKye1ZRekk13",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776566889061?alt=media&token=c4a69705-b3eb-4356-a9d9-28e108dc544a",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T02:48:15.564000+00:00"
+    },
+    {
+      "id": "LIVE-012",
+      "firestore_doc_id": "6vCLwYXlRynkT8bTFxdK",
+      "idCustomer": "OqI8LK6KBdQtmLn4yKye1ZRekk13",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776566293018?alt=media&token=1c4cc714-ceed-4589-b1e4-bd7a4bfabaae",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di rumah yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T02:38:18.977000+00:00"
+    },
+    {
+      "id": "LIVE-013",
+      "firestore_doc_id": "7VnaLW06HQJoE0AkWWdO",
+      "idCustomer": "UYLQZPr07lOkKQhNoFjPSAIzt7q1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776314904362?alt=media&token=afae517f-b1d8-4918-9ae0-cc13a13475fe",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-16T04:48:31.595000+00:00"
+    },
+    {
+      "id": "LIVE-014",
+      "firestore_doc_id": "7fN1PSzQ9CxFzYJ7tR3g",
+      "idCustomer": "tdAr5h6Tt0WztzXNdCEDvNjjeDv1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776864058494?alt=media&token=5c823188-1b6e-42e6-b7ed-734e9d6c50c5",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-22T13:21:52.006000+00:00"
+    },
+    {
+      "id": "LIVE-015",
+      "firestore_doc_id": "82hgWPXxOoN575YdzQpp",
+      "idCustomer": "UYLQZPr07lOkKQhNoFjPSAIzt7q1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776295398217?alt=media&token=6fb8650e-dbb9-4a59-a584-48539c4e9374",
+      "lang": "en",
+      "student_inquiry": "What can you find in the playground that demonstrates circular motion?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T23:23:25.168000+00:00"
+    },
+    {
+      "id": "LIVE-016",
+      "firestore_doc_id": "AWuhaxT0oYxnE0ALVDMi",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776737575877?alt=media&token=8d378be8-9d6d-495c-871e-12491d3e3e8f",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T02:13:01.403000+00:00"
+    },
+    {
+      "id": "LIVE-017",
+      "firestore_doc_id": "BXzQUhT7MoJYiVpdEN28",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776149963478?alt=media&token=b31f4a09-ea77-4444-94f3-11ff14da2504",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di playground yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-14T06:59:30.133000+00:00"
+    },
+    {
+      "id": "LIVE-018",
+      "firestore_doc_id": "DzrSBpOn3zZJAN3zCuQc",
+      "idCustomer": "LHrL9MyHqQZXEhnn7rfomaegVYZ2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776565430678?alt=media&token=e18f3c66-5675-42ac-82e1-80d5d67fcb8c",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di sekitar playground yang bergerak mengikuti lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T02:23:56.414000+00:00"
+    },
+    {
+      "id": "LIVE-019",
+      "firestore_doc_id": "EXevo6IlXgRgdLml3zSl",
+      "idCustomer": "qZbjrBpk21gB5dluTsyuQBWVVrJ3",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Kelas",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776136776451?alt=media&token=b0549b00-0379-4984-b1fd-a41de37354c4",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di kelas yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Kelas?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Kelas?",
+        "Bagaimana gerakan melingkar pada objek ini di Kelas menunjukkan (a)?",
+        "Di Kelas, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Kelas, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-14T03:19:43.342000+00:00"
+    },
+    {
+      "id": "LIVE-020",
+      "firestore_doc_id": "FDZPX1Tpja1Cxvq4SeEM",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776481676672?alt=media&token=16855fa1-53a6-4ea4-9eeb-33dfed5516d8",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di playground yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T03:08:03.694000+00:00"
+    },
+    {
+      "id": "LIVE-021",
+      "firestore_doc_id": "FSLGSSBNFp9jKUrnak7g",
+      "idCustomer": "OqI8LK6KBdQtmLn4yKye1ZRekk13",
+      "object_label": "roda depan objek",
+      "object_label_id": "roda depan objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776734674670?alt=media&token=c7bd6bd7-0336-4c91-b4fa-91adbe5ebfde",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada roda depan objek di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada roda depan objek di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada roda depan objek?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T01:24:42.779000+00:00"
+    },
+    {
+      "id": "LIVE-022",
+      "firestore_doc_id": "GG3x9C0hb3xOj4uqPnmW",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776482225797?alt=media&token=f81f406e-8c99-4670-8fe4-3cc710a19d45",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di sekitar playground yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T03:17:11.245000+00:00"
+    },
+    {
+      "id": "LIVE-023",
+      "firestore_doc_id": "GGuUPHQ20q3I5bLrfufw",
+      "idCustomer": "oB9jc5sZRHeYaRfBNA0uuzUk3UV2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776515979924?alt=media&token=fca4f532-9fd6-4ea4-8658-67bc480c9e31",
+      "lang": "en",
+      "student_inquiry": "What can you find in the playground that demonstrates circular motion?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T12:39:44.736000+00:00"
+    },
+    {
+      "id": "LIVE-024",
+      "firestore_doc_id": "GSacjBFWrWNiCazGtEV6",
+      "idCustomer": "ZJZXYpGqKzVsox8VmOUYnlBwYPb2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776823794610?alt=media&token=672aba20-7b8e-4afb-bbdf-c64e14307cdb",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di sekitar playground yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-22T02:09:59.451000+00:00"
+    },
+    {
+      "id": "LIVE-025",
+      "firestore_doc_id": "IEA5dKaQJQv4gHHc9gni",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776481838200?alt=media&token=3af4c8db-9de0-4a5e-8c90-938cc33669db",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T03:10:44.888000+00:00"
+    },
+    {
+      "id": "LIVE-026",
+      "firestore_doc_id": "IyVgqTRX6x1kIjZw85Ml",
+      "idCustomer": "OqI8LK6KBdQtmLn4yKye1ZRekk13",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776566928457?alt=media&token=0e587f95-97b0-4b7e-ac83-ebbb2a4e7a48",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T02:48:54.192000+00:00"
+    },
+    {
+      "id": "LIVE-027",
+      "firestore_doc_id": "JpSi2gNY1FXwHLCq8ac0",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776741223241?alt=media&token=11721f9f-71d4-40b1-899c-e2b169719d7b",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T03:13:49.028000+00:00"
+    },
+    {
+      "id": "LIVE-028",
+      "firestore_doc_id": "KTtbdmpTBQi1ZUl5dYVR",
+      "idCustomer": "LHrL9MyHqQZXEhnn7rfomaegVYZ2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776563957496?alt=media&token=1ef5f20b-5e32-4c0a-aeef-4088cbd72cff",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T01:59:23.101000+00:00"
+    },
+    {
+      "id": "LIVE-029",
+      "firestore_doc_id": "N5DKaxPsU6jlhEX5D7TZ",
+      "idCustomer": "UYLQZPr07lOkKQhNoFjPSAIzt7q1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776803847966?alt=media&token=31931ca4-0687-45b8-8221-2d63c2170191",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T20:37:33.026000+00:00"
+    },
+    {
+      "id": "LIVE-030",
+      "firestore_doc_id": "N9QYnScCLAQcSeFx3hrO",
+      "idCustomer": "ZJZXYpGqKzVsox8VmOUYnlBwYPb2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776262060117?alt=media&token=13973989-6d37-4555-acf8-c2a68d850237",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T14:07:47.185000+00:00"
+    },
+    {
+      "id": "LIVE-031",
+      "firestore_doc_id": "NZAPQC3hPzTZtM8FEMj3",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776481596967?alt=media&token=c585d63c-1239-4fcc-97af-03caa274f291",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak mengikuti lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T03:06:46.442000+00:00"
+    },
+    {
+      "id": "LIVE-032",
+      "firestore_doc_id": "PyNiHbZ0DNblr6VbwMUv",
+      "idCustomer": "oB9jc5sZRHeYaRfBNA0uuzUk3UV2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776515892816?alt=media&token=7205952f-d357-44f1-8358-ed0313d4cc09",
+      "lang": "en",
+      "student_inquiry": "What can you find in the playground that demonstrates circular motion?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T12:38:21.403000+00:00"
+    },
+    {
+      "id": "LIVE-033",
+      "firestore_doc_id": "QcGKl8kBzysSmOiiClF2",
+      "idCustomer": "Kxojnxk3DTXfILMiJCDsZwh5S3O2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776312216109?alt=media&token=d65791d6-eacc-4f46-a5f1-c38b0e38588e",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-16T04:03:44.605000+00:00"
+    },
+    {
+      "id": "LIVE-034",
+      "firestore_doc_id": "T0J1UHpcxNlCcQjuAI6J",
+      "idCustomer": "YCuDymuOTCXqqmcEOCb5UNAE5Sz1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776908592682?alt=media&token=329a8fe7-19d9-463b-983a-9914b752d3c7",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-23T01:43:18.062000+00:00"
+    },
+    {
+      "id": "LIVE-035",
+      "firestore_doc_id": "U3cIFbQzGpgCyElLe8Tz",
+      "idCustomer": "oB9jc5sZRHeYaRfBNA0uuzUk3UV2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776515941759?alt=media&token=d81c1b42-77fe-4df5-be80-2d9127241f63",
+      "lang": "en",
+      "student_inquiry": "What can you find in the playground that demonstrates circular motion?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T12:39:06.701000+00:00"
+    },
+    {
+      "id": "LIVE-036",
+      "firestore_doc_id": "UFKYH6NSiDh8x7QshmKT",
+      "idCustomer": "Kxojnxk3DTXfILMiJCDsZwh5S3O2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776223233370?alt=media&token=1bfa224f-a783-42be-94e4-32074bbf7b8d",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di rumah yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T03:20:42.322000+00:00"
+    },
+    {
+      "id": "LIVE-037",
+      "firestore_doc_id": "ULS8R3WgwIE6dUukwQn6",
+      "idCustomer": "tdAr5h6Tt0WztzXNdCEDvNjjeDv1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776561856763?alt=media&token=897f7a92-5563-4038-9739-886bdd049219",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T01:24:22.127000+00:00"
+    },
+    {
+      "id": "LIVE-038",
+      "firestore_doc_id": "UrRB8VOnQB0Gg3V7icBD",
+      "idCustomer": "59wY1KaCbNYHvAUecjI6mLgdIk73",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776147033352?alt=media&token=eea8ce00-467a-4831-9dd7-136ebf368d62",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-14T06:10:40.969000+00:00"
+    },
+    {
+      "id": "LIVE-039",
+      "firestore_doc_id": "W4Ogc3nDe8cqMeXgO5MK",
+      "idCustomer": "UYLQZPr07lOkKQhNoFjPSAIzt7q1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Kelas",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776742461062?alt=media&token=1a00b573-320f-4948-afe6-449090b1e6c5",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Kelas yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Kelas?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Kelas?",
+        "Bagaimana gerakan melingkar pada objek ini di Kelas menunjukkan (a)?",
+        "Di Kelas, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Kelas, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T03:34:27.259000+00:00"
+    },
+    {
+      "id": "LIVE-040",
+      "firestore_doc_id": "WPaUVQ3t4hR8TtO0uSqa",
+      "idCustomer": "Kxojnxk3DTXfILMiJCDsZwh5S3O2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776313403961?alt=media&token=7baa4ba5-d651-4cce-8078-d3b68a11e86e",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-16T04:23:31.211000+00:00"
+    },
+    {
+      "id": "LIVE-041",
+      "firestore_doc_id": "aBwSwRhM2Crj2DF1XQ5P",
+      "idCustomer": "LHrL9MyHqQZXEhnn7rfomaegVYZ2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776565138538?alt=media&token=06b8b086-8631-470e-bd13-4c198ebbc07f",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T02:19:04.401000+00:00"
+    },
+    {
+      "id": "LIVE-042",
+      "firestore_doc_id": "awWYYgEYfTara3xBL5iy",
+      "idCustomer": "59wY1KaCbNYHvAUecjI6mLgdIk73",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776805354736?alt=media&token=c58c03bc-2de7-4f49-bdf4-9d0b0d68b9ae",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak mengikuti lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T21:02:41.351000+00:00"
+    },
+    {
+      "id": "LIVE-043",
+      "firestore_doc_id": "bBe9GOucQnlVw6SU8FnJ",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776481859039?alt=media&token=796ff10d-59c0-47f6-9817-7113d81667cc",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-18T03:11:04.552000+00:00"
+    },
+    {
+      "id": "LIVE-044",
+      "firestore_doc_id": "cMFlMGVP1zhtTn0PCZGL",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776151271751?alt=media&token=0fa48445-da98-4a93-b0d5-2047fdf1f6e5",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumah yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-14T07:21:19.489000+00:00"
+    },
+    {
+      "id": "LIVE-045",
+      "firestore_doc_id": "cvpfSchSBVn8Y9I4ZOjX",
+      "idCustomer": "ZJZXYpGqKzVsox8VmOUYnlBwYPb2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776823540045?alt=media&token=b7115c81-7cf5-4e06-855b-763f10c7a7ae",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang berputar atau bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-22T02:05:45.858000+00:00"
+    },
+    {
+      "id": "LIVE-046",
+      "firestore_doc_id": "d8axdlaHKMOHlrSbKiiv",
+      "idCustomer": "LHrL9MyHqQZXEhnn7rfomaegVYZ2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776904432968?alt=media&token=f8d173d8-f01d-47b6-bb41-f9b677b36607",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di playground yang menunjukkan gerakan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-23T00:33:58.382000+00:00"
+    },
+    {
+      "id": "LIVE-047",
+      "firestore_doc_id": "ddFAR4KLpuiHZ1O6ppMU",
+      "idCustomer": "59wY1KaCbNYHvAUecjI6mLgdIk73",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776822529648?alt=media&token=16a23297-73fa-4eba-959d-ee21fec27444",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-22T01:49:08.713000+00:00"
+    },
+    {
+      "id": "LIVE-048",
+      "firestore_doc_id": "frDrpru8mOaRfFbNPgaG",
+      "idCustomer": "tdAr5h6Tt0WztzXNdCEDvNjjeDv1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776562432806?alt=media&token=d370e60c-6d49-4169-bb9f-2a617d18a791",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T01:33:57.788000+00:00"
+    },
+    {
+      "id": "LIVE-049",
+      "firestore_doc_id": "gffjTmL8Qo8pYuXinYt8",
+      "idCustomer": "UYLQZPr07lOkKQhNoFjPSAIzt7q1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776296215331?alt=media&token=361ba5a6-6b92-4ea3-87d8-fe0d81349d0f",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T23:37:02.206000+00:00"
+    },
+    {
+      "id": "LIVE-050",
+      "firestore_doc_id": "gxzu8KHrDcbRXxrY46zb",
+      "idCustomer": "tdAr5h6Tt0WztzXNdCEDvNjjeDv1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776262821524?alt=media&token=57cd81ca-6e51-4619-86fb-0b23fa4120b8",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T14:20:31.582000+00:00"
+    },
+    {
+      "id": "LIVE-051",
+      "firestore_doc_id": "kInhRDCslxccHLgCZFK7",
+      "idCustomer": "Kxojnxk3DTXfILMiJCDsZwh5S3O2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776224022261?alt=media&token=6a53fc93-0538-47a2-89f0-9744f3402bd8",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T03:33:50.454000+00:00"
+    },
+    {
+      "id": "LIVE-052",
+      "firestore_doc_id": "lCHldw0eYo7pWaps9QaU",
+      "idCustomer": "ZJZXYpGqKzVsox8VmOUYnlBwYPb2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776261500416?alt=media&token=727b5744-f185-4613-a08f-bcf9b6fc68e1",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di rumah yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T13:58:27.542000+00:00"
+    },
+    {
+      "id": "LIVE-053",
+      "firestore_doc_id": "lQKhaav7b1191fIFXPve",
+      "idCustomer": "UYLQZPr07lOkKQhNoFjPSAIzt7q1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776295283843?alt=media&token=44ab5a3b-d809-4170-bbcc-24b821edd4d9",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di sekitar playground yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T23:22:06.873000+00:00"
+    },
+    {
+      "id": "LIVE-054",
+      "firestore_doc_id": "m7C9nd32IALRZTM0kVhe",
+      "idCustomer": "59wY1KaCbNYHvAUecjI6mLgdIk73",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776806362067?alt=media&token=bc88dd03-5574-4541-a0ad-6f0e773a1b0a",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Playground yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T21:19:27.283000+00:00"
+    },
+    {
+      "id": "LIVE-055",
+      "firestore_doc_id": "mDeV9eGlnfvEXkRKWpAv",
+      "idCustomer": "59wY1KaCbNYHvAUecjI6mLgdIk73",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776147851572?alt=media&token=f7fd1f29-d678-4fe3-8dec-9d4d99350d88",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di sekitar playground yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-14T06:24:18.668000+00:00"
+    },
+    {
+      "id": "LIVE-056",
+      "firestore_doc_id": "mPMZ65DOrg1KdvU7xwse",
+      "idCustomer": "tdAr5h6Tt0WztzXNdCEDvNjjeDv1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776262854011?alt=media&token=ecf0578e-fa27-4fe9-bfb3-4e34e135aa67",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T14:21:00.644000+00:00"
+    },
+    {
+      "id": "LIVE-057",
+      "firestore_doc_id": "mqZbboamZHNOHDBptbiI",
+      "idCustomer": "iZJKuGTICFQA8OpGpS583N9XICh2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776740869902?alt=media&token=f68982de-1413-4762-8f8f-d842d6fbc07c",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T03:07:55.629000+00:00"
+    },
+    {
+      "id": "LIVE-058",
+      "firestore_doc_id": "nuf8iEcpnkcWxwMKtZFt",
+      "idCustomer": "tdAr5h6Tt0WztzXNdCEDvNjjeDv1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776562179247?alt=media&token=6f1168b9-8c27-4865-939c-df7c00bb3994",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumah yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T01:29:45.078000+00:00"
+    },
+    {
+      "id": "LIVE-059",
+      "firestore_doc_id": "oMY7gGVGgyVaHlpDHwQS",
+      "idCustomer": "tdAr5h6Tt0WztzXNdCEDvNjjeDv1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776826985608?alt=media&token=d48377c9-e3fe-49f8-ab9d-259fc657163d",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-22T03:03:11.362000+00:00"
+    },
+    {
+      "id": "LIVE-060",
+      "firestore_doc_id": "pMzAg49LXLS0DEkNkaW3",
+      "idCustomer": "Kxojnxk3DTXfILMiJCDsZwh5S3O2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776223279261?alt=media&token=393834a9-e92a-4667-a0e1-98564edfaa78",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di rumah yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T03:21:28.803000+00:00"
+    },
+    {
+      "id": "LIVE-061",
+      "firestore_doc_id": "pcHHoQX4SECMiPNCvbt4",
+      "idCustomer": "ZJZXYpGqKzVsox8VmOUYnlBwYPb2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776222074461?alt=media&token=9e12baee-9075-4e01-8ac8-91cc4050db62",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa Anda temukan di rumah yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T03:01:21.503000+00:00"
+    },
+    {
+      "id": "LIVE-062",
+      "firestore_doc_id": "pfG4Q8bBceZoIl0WMdeN",
+      "idCustomer": "59wY1KaCbNYHvAUecjI6mLgdIk73",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776822138069?alt=media&token=7abb5461-bf32-422d-b46c-1b3a76516783",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak mengikuti lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-22T01:42:25.139000+00:00"
+    },
+    {
+      "id": "LIVE-063",
+      "firestore_doc_id": "ppPd6KfEDYq4LgT2unOl",
+      "idCustomer": "OqI8LK6KBdQtmLn4yKye1ZRekk13",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776735687630?alt=media&token=2cd55802-173f-4098-9c38-de131452bfa2",
+      "lang": "en",
+      "student_inquiry": "What can you find in the playground that demonstrates circular motion?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T01:41:37.489000+00:00"
+    },
+    {
+      "id": "LIVE-064",
+      "firestore_doc_id": "qM53aON6fHqF5QLHg5Xr",
+      "idCustomer": "UYLQZPr07lOkKQhNoFjPSAIzt7q1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776295437064?alt=media&token=3224faf5-0daf-4fcf-b394-6e41e3d88e89",
+      "lang": "en",
+      "student_inquiry": "What can you find in the playground that demonstrates circular motion?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T23:24:03.303000+00:00"
+    },
+    {
+      "id": "LIVE-065",
+      "firestore_doc_id": "qXhbeJPXjmi7FMI8Ebd8",
+      "idCustomer": "LHrL9MyHqQZXEhnn7rfomaegVYZ2",
+      "object_label": "objek kipas",
+      "object_label_id": "objek kipas",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776564303716?alt=media&token=7194c8e5-c33a-4722-be85-c11d4edcc2d6",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di rumahmu yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada objek kipas di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada objek kipas di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada objek kipas?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-19T02:05:09.260000+00:00"
+    },
+    {
+      "id": "LIVE-066",
+      "firestore_doc_id": "qZX2MiNsB4bxcNKGj8x6",
+      "idCustomer": "LHrL9MyHqQZXEhnn7rfomaegVYZ2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776902273590?alt=media&token=77a59e1f-0cf4-478f-aa3e-138071f0257e",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di sekitar playground yang menunjukkan gerakan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-22T23:57:58.893000+00:00"
+    },
+    {
+      "id": "LIVE-067",
+      "firestore_doc_id": "sw7vhBnAGILyqkfKZCLa",
+      "idCustomer": "qZbjrBpk21gB5dluTsyuQBWVVrJ3",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776022717783?alt=media&token=9d4739f3-3312-4e6c-8389-823666fc017e",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di playground yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-12T19:38:44.577000+00:00"
+    },
+    {
+      "id": "LIVE-068",
+      "firestore_doc_id": "tbZw1RHW4ZBdbC0hKs2e",
+      "idCustomer": "YCuDymuOTCXqqmcEOCb5UNAE5Sz1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776907978658?alt=media&token=8be18b88-52e9-44cc-9b6b-eac91a9a9c33",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat Anda temukan di sekitar rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-23T01:33:04.370000+00:00"
+    },
+    {
+      "id": "LIVE-069",
+      "firestore_doc_id": "uUomhsZAL3srGKFiH252",
+      "idCustomer": "UYLQZPr07lOkKQhNoFjPSAIzt7q1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776295790059?alt=media&token=3bfc8327-bd2d-4f97-abe8-264c067b69df",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di playground yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T23:29:56.253000+00:00"
+    },
+    {
+      "id": "LIVE-070",
+      "firestore_doc_id": "vmHE0Vbg7L34y7xMmkwV",
+      "idCustomer": "YCuDymuOTCXqqmcEOCb5UNAE5Sz1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776908279429?alt=media&token=dca2d31a-5fd1-4038-bfd7-6790f899fbb7",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-23T01:38:04.617000+00:00"
+    },
+    {
+      "id": "LIVE-071",
+      "firestore_doc_id": "wYUzIlrr8EREadhiSiyT",
+      "idCustomer": "59wY1KaCbNYHvAUecjI6mLgdIk73",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776147807015?alt=media&token=bd3cd18b-71b3-44fb-81ff-8ad84c0c96da",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di sekitar playground yang bergerak dalam lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-14T06:23:35.113000+00:00"
+    },
+    {
+      "id": "LIVE-072",
+      "firestore_doc_id": "zLKkGHk9QDzpJGaYholB",
+      "idCustomer": "tdAr5h6Tt0WztzXNdCEDvNjjeDv1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Playground",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776863210531?alt=media&token=2935e9ee-990e-423c-8a53-27e6a32093b7",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di playground yang bergerak dalam jalur melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Playground?",
+        "Bagaimana gerakan melingkar pada objek ini di Playground menunjukkan (a)?",
+        "Di Playground, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Playground, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-22T13:06:57.056000+00:00"
+    },
+    {
+      "id": "LIVE-073",
+      "firestore_doc_id": "zU6gaHBJPnY3gjLq2kQu",
+      "idCustomer": "UYLQZPr07lOkKQhNoFjPSAIzt7q1",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776804116714?alt=media&token=1ccec139-c4c1-4af9-8f08-070b240cfd88",
+      "lang": "id",
+      "student_inquiry": "Apa yang dapat kamu temukan di rumah yang menunjukkan gerak melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-21T20:42:01.994000+00:00"
+    },
+    {
+      "id": "LIVE-074",
+      "firestore_doc_id": "zsoe5rnGhLvUu69nlsHz",
+      "idCustomer": "Kxojnxk3DTXfILMiJCDsZwh5S3O2",
+      "object_label": "objek",
+      "object_label_id": "objek",
+      "location": "Rumah",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/gphysolve.firebasestorage.app/o/images%2Fcapture_image_1776224581591?alt=media&token=2932df48-8f9b-41e9-bc71-38ae9b6fcf89",
+      "lang": "id",
+      "student_inquiry": "Apa yang bisa kamu temukan di Rumah yang bergerak pada lintasan melingkar?",
+      "references": [
+        "Apa yang bisa kamu amati tentang (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana hubungan (r), (ω), dan (a) pada benda pada gambar di Rumah?",
+        "Bagaimana gerakan melingkar pada objek ini di Rumah menunjukkan (a)?",
+        "Di Rumah, apa yang diamati tentang (r) dan (a) pada benda pada gambar?",
+        "Pada objek di Rumah, bagaimana (ω) memengaruhi (a)?"
+      ],
+      "createdAt": "2026-04-15T03:43:09.712000+00:00"
+    }
+  ]
+}
