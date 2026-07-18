@@ -26,13 +26,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create evaluation_plot directory if it doesn't exist
-evaluation_plot_dir = "evaluation_plot"
-if not os.path.exists(evaluation_plot_dir):
-    os.makedirs(evaluation_plot_dir)
+# Create required directories if not exists
+for d in ["evaluation_plot", "image_result"]:
+    if not os.path.exists(d):
+        os.makedirs(d)
 
-# Mount static folder for evaluation_plot
+# Serve static folders
 app.mount("/evaluation_plot", StaticFiles(directory="evaluation_plot"), name="evaluation_plot")
+app.mount("/image_result",    StaticFiles(directory="image_result"),    name="image_result")
 
 # app.include_router(router)
 app.include_router(router_analyze_data)

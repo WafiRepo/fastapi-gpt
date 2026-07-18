@@ -5,6 +5,7 @@ from openai import OpenAI
 import math
 import logging
 from collections import Counter
+from typing import Optional
 from fastapi import APIRouter, File, UploadFile, FastAPI, Form, HTTPException, Body
 from fastapi.responses import JSONResponse
 import os
@@ -53,7 +54,7 @@ def get_db_connection():
         logger.error("Error while connecting to MySQL: %s", e)
         return None
 
-def save_to_database(label, confidence, center, radius, image_path, user_id):
+def save_to_database(label, confidence, center, radius, image_path, user_id, device_id=1):
     connection = None
     try:
         connection = get_db_connection()
@@ -73,6 +74,7 @@ def save_to_database(label, confidence, center, radius, image_path, user_id):
                 radius INT,
                 image_path VARCHAR(500),
                 user_id VARCHAR(64),
+                device_id INT DEFAULT 1,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """
@@ -90,13 +92,19 @@ def save_to_database(label, confidence, center, radius, image_path, user_id):
         if not result:
             logger.info("Column 'user_id' not found in table. Altering table to add the column.")
             cursor.execute("ALTER TABLE processed_images ADD COLUMN user_id VARCHAR(64)")
+        # Check if 'device_id' column exists; if not, add it.
+        cursor.execute("SHOW COLUMNS FROM processed_images LIKE 'device_id'")
+        result = cursor.fetchone()
+        if not result:
+            logger.info("Column 'device_id' not found in table. Altering table to add the column.")
+            cursor.execute("ALTER TABLE processed_images ADD COLUMN device_id INT DEFAULT 1")
 
         # Insert data into the table
         insert_query = """
-            INSERT INTO processed_images (label, confidence, center_x, center_y, radius, image_path, user_id)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO processed_images (label, confidence, center_x, center_y, radius, image_path, user_id, device_id)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
         """
-        data = (label, confidence, center["x"], center["y"], radius, image_path, user_id)
+        data = (label, confidence, center["x"], center["y"], radius, image_path, user_id, device_id)
         cursor.execute(insert_query, data)
         connection.commit()
         logger.info("Data saved to database successfully.")
@@ -117,9 +125,18 @@ def get_label_from_gpt(image_bytes: bytes) -> str:
         image_url = f"data:image/jpeg;base64,{image_base64}"
 
         prompt = (
-            "This is an image. "
-            "Please provide ONE WORD (only one word) that best represents the main object in the image. "
-            "Do not give any explanation. Do not add any extra words. Just one word."
+            "Perhatikan gambar ini dengan seksama. "
+            "Identifikasi BAGIAN SPESIFIK dari benda yang terlihat berputar atau bergerak melingkar — "
+            "bukan nama keseluruhan bendanya. "
+            "Jawab dalam Bahasa Indonesia, maksimal 3 kata. "
+            "Contoh: jika kamu melihat sepeda dan bagian yang terlihat adalah roda depan, jawab 'roda depan'. "
+            "Jika terlihat gear/gir, jawab 'gir depan' atau 'gir belakang'. "
+            "Jika terlihat pedal, jawab 'pedal'. "
+            "Jika terlihat kipas, jawab 'baling-baling'. "
+            "Jika terlihat mesin cuci, jawab 'drum'. "
+            "Jika terlihat komidi putar, jawab 'komidi putar'. "
+            "Hanya tulis nama bagian yang berputar (1-3 kata Bahasa Indonesia). "
+            "Jangan beri penjelasan. Jangan kata tambahan."
         )
 
         logger.debug("Sending request to GPT-4o.")
@@ -134,7 +151,7 @@ def get_label_from_gpt(image_bytes: bytes) -> str:
                     ]
                 }
             ],
-            max_tokens=10,
+            max_tokens=20,
             temperature=0.0
         )
 
@@ -221,7 +238,7 @@ def get_base64_from_url(url):
 
 # --- FastAPI Endpoint for Processing Image ---
 @router_process_image.post("/process-image/")
-async def process_image(file: UploadFile = File(...), user_id: str = Form(...)):
+async def process_image(file: UploadFile = File(...), user_id: str = Form(...), device_id: int = Form(1)):
     try:
         # Simpan file ke folder user dengan nama unik
         user_folder = f'./image_result/{user_id}'
@@ -242,7 +259,8 @@ async def process_image(file: UploadFile = File(...), user_id: str = Form(...)):
             center={"x": None, "y": None},
             radius=None,
             image_path=file_path,
-            user_id=user_id
+            user_id=user_id,
+            device_id=device_id
         )
         if not db_result:
             return JSONResponse(content={
@@ -304,6 +322,9 @@ class UpdateLabelRequest(BaseModel):
     user_id: str
     image_path: str
     new_label: str
+    physical_radius: Optional[float] = None
+    gear_front_radius: Optional[float] = None
+    gear_rear_radius: Optional[float] = None
 
 
 # --- Validasi objek untuk centripetal ---
@@ -336,19 +357,61 @@ def _load_centripetal_keywords() -> set:
 
 
 def _is_label_centripetal(label: str) -> bool:
-    """Cek apakah label cocok dengan objek centripetal (keyword atau substring)."""
+    """
+    Cek apakah label terkait gerak melingkar/sentripetal.
+    Tahap 1: keyword matching (EN + ID) untuk respons cepat.
+    Tahap 2: fallback ke GPT jika tidak ditemukan di keyword.
+    """
     if not label or not str(label).strip():
         return False
     normalized = str(label).lower().strip()
     keywords = _load_centripetal_keywords()
-    # Exact match
-    if normalized in keywords:
+
+    # Tambahan keyword Bahasa Indonesia umum
+    id_keywords = {
+        "roda", "kipas", "gir", "gear", "pedal", "ban", "velg", "turbin",
+        "baling", "baling-baling", "kincir", "komidi", "putar", "putaran",
+        "melingkar", "rotasi", "berputar", "piringan", "cakram", "roda gigi",
+        "engkol", "rantai", "propeller", "bilah", "blade", "drum",
+    }
+
+    if normalized in keywords or normalized in id_keywords:
         return True
-    # Substring: salah satu keyword ada di label atau label ada di keyword
-    for kw in keywords:
+    for kw in keywords | id_keywords:
         if kw in normalized or normalized in kw:
             return True
-    return False
+
+    # Fallback: tanya GPT — language-agnostic
+    return _gpt_check_centripetal(label)
+
+
+def _gpt_check_centripetal(label: str) -> bool:
+    """GPT fallback: apakah label (dalam bahasa apapun) terkait gerak melingkar."""
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a physics classifier. Answer ONLY 'yes' or 'no'. "
+                        "Does the given object name (in any language) refer to something that can rotate, spin, "
+                        "or move in a circular path, making it relevant to centripetal acceleration? "
+                        "Include specific parts of objects (e.g. 'roda' = wheel, 'pedal', 'gir' = gear, 'kipas' = fan blade). "
+                        "Answer 'yes' if it can rotate. Answer 'no' otherwise."
+                    ),
+                },
+                {"role": "user", "content": f"Object: {label}"},
+            ],
+            max_tokens=3,
+            temperature=0.0,
+        )
+        answer = (response.choices[0].message.content or "").strip().lower()
+        return answer.startswith("yes")
+    except Exception as e:
+        logger.warning("GPT centripetal check failed for '%s': %s", label, e)
+        # Jika GPT gagal, izinkan saja agar tidak memblokir user
+        return True
 
 
 def _get_gpt_feedback_for_invalid_object(label: str) -> str:
@@ -478,15 +541,35 @@ async def overwrite_label(data: UpdateLabelRequest):
         if connection is None:
             return JSONResponse(content={"error": "Gagal koneksi ke database."}, status_code=500)
         cursor = connection.cursor()
-        
-        # Update label dan timestamp
-        logger.info(f"Updating label for user {data.user_id} from path {data.image_path} to '{data.new_label}'")
+
+        # Tambah kolom baru jika belum ada
+        for col, col_type in [
+            ("physical_radius", "FLOAT"),
+            ("gear_front_radius", "FLOAT"),
+            ("gear_rear_radius", "FLOAT"),
+        ]:
+            cursor.execute(f"SHOW COLUMNS FROM processed_images LIKE '{col}'")
+            if not cursor.fetchone():
+                cursor.execute(f"ALTER TABLE processed_images ADD COLUMN {col} {col_type}")
+
+        logger.info(
+            "Updating label for user %s path %s -> '%s' radius=%s gear_front_r=%s gear_rear_r=%s",
+            data.user_id, data.image_path, data.new_label,
+            data.physical_radius, data.gear_front_radius, data.gear_rear_radius,
+        )
         update_query = """
             UPDATE processed_images
-            SET label = %s, created_at = CURRENT_TIMESTAMP
+            SET label = %s, created_at = CURRENT_TIMESTAMP,
+                physical_radius = COALESCE(%s, physical_radius),
+                gear_front_radius = COALESCE(%s, gear_front_radius),
+                gear_rear_radius = COALESCE(%s, gear_rear_radius)
             WHERE user_id = %s AND image_path = %s
         """
-        cursor.execute(update_query, (data.new_label, data.user_id, data.image_path))
+        cursor.execute(update_query, (
+            data.new_label,
+            data.physical_radius, data.gear_front_radius, data.gear_rear_radius,
+            data.user_id, data.image_path,
+        ))
         logger.info(f"Label updated successfully. Rows affected: {cursor.rowcount}")
         connection.commit()
         rowcount = cursor.rowcount
@@ -519,6 +602,137 @@ async def get_latest_label_endpoint(user_id: str):
     except Exception as e:
         logging.exception("Error getting latest label.")
         return JSONResponse(content={"error": str(e)}, status_code=500)
+
+def _ensure_photo_attempts_table(cursor):
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS photo_attempts (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id VARCHAR(64) NOT NULL,
+            device_id INT DEFAULT 1,
+            label VARCHAR(255),
+            is_valid TINYINT(1) NOT NULL DEFAULT 0,
+            attempt_number INT NOT NULL DEFAULT 1,
+            image_path VARCHAR(500),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            INDEX idx_pa_user (user_id)
+        )
+    """)
+
+
+class PhotoAttemptRequest(BaseModel):
+    user_id: str
+    device_id: int = 1
+    label: str = ""
+    is_valid: bool = False
+    attempt_number: int = 1
+    image_path: Optional[str] = None
+
+
+@router_process_image.post("/log-photo-attempt/")
+async def log_photo_attempt(data: PhotoAttemptRequest):
+    connection = get_db_connection()
+    if not connection:
+        return JSONResponse(content={"error": "DB connection failed"}, status_code=500)
+    try:
+        cursor = connection.cursor()
+        _ensure_photo_attempts_table(cursor)
+        cursor.execute("""
+            INSERT INTO photo_attempts (user_id, device_id, label, is_valid, attempt_number, image_path)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (data.user_id, data.device_id, data.label, int(data.is_valid),
+              data.attempt_number, data.image_path))
+        connection.commit()
+        return {"status": "ok"}
+    except Exception as e:
+        logging.exception("Error logging photo attempt.")
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+    finally:
+        cursor.close()
+        connection.close()
+
+
+@router_process_image.get("/admin/photo-attempts/")
+async def admin_photo_attempts(user_id: Optional[str] = None, limit: int = 500):
+    """Return semua photo attempt untuk admin — opsional filter by user_id."""
+    connection = get_db_connection()
+    if not connection:
+        return JSONResponse(content={"error": "DB connection failed"}, status_code=500)
+    try:
+        cursor = connection.cursor(dictionary=True)
+        _ensure_photo_attempts_table(cursor)
+        if user_id:
+            cursor.execute("""
+                SELECT id, user_id, device_id, label, is_valid, attempt_number, image_path, created_at
+                FROM photo_attempts WHERE user_id = %s
+                ORDER BY user_id, device_id, attempt_number
+            """, (user_id,))
+        else:
+            cursor.execute("""
+                SELECT id, user_id, device_id, label, is_valid, attempt_number, image_path, created_at
+                FROM photo_attempts
+                ORDER BY user_id, device_id, attempt_number
+                LIMIT %s
+            """, (limit,))
+        rows = cursor.fetchall()
+        result = []
+        for row in rows:
+            result.append({
+                "id":             row["id"],
+                "user_id":        row["user_id"],
+                "device_id":      row["device_id"],
+                "label":          row["label"],
+                "is_valid":       bool(row["is_valid"]),
+                "attempt_number": row["attempt_number"],
+                "image_path":     row["image_path"],
+                "created_at":     str(row["created_at"]),
+            })
+        return JSONResponse(content={"attempts": result}, status_code=200)
+    except Exception as e:
+        logging.exception("Error fetching photo attempts for admin.")
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+    finally:
+        cursor.close()
+        connection.close()
+
+
+@router_process_image.get("/admin/device-photos")
+async def admin_device_photos(limit: int = 100):
+    """Return latest processed_images rows untuk admin panel — semua user, terbaru duluan."""
+    connection = get_db_connection()
+    if not connection:
+        return JSONResponse(content={"error": "DB connection failed"}, status_code=500)
+    try:
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("""
+            SELECT id, user_id, device_id, label,
+                   physical_radius, gear_front_radius, gear_rear_radius,
+                   image_path, created_at
+            FROM processed_images
+            ORDER BY created_at DESC
+            LIMIT %s
+        """, (limit,))
+        rows = cursor.fetchall()
+        result = []
+        for row in rows:
+            result.append({
+                "id":                row["id"],
+                "user_id":           row["user_id"],
+                "device_id":         row["device_id"],
+                "label":             row["label"],
+                "physical_radius":   float(row["physical_radius"])   if row.get("physical_radius")   is not None else None,
+                "gear_front_radius": float(row["gear_front_radius"]) if row.get("gear_front_radius") is not None else None,
+                "gear_rear_radius":  float(row["gear_rear_radius"])  if row.get("gear_rear_radius")  is not None else None,
+                "image_path":        row["image_path"],
+                "created_at":        str(row["created_at"]),
+            })
+        return JSONResponse(content={"photos": result}, status_code=200)
+    except Exception as e:
+        logging.exception("Error fetching device photos for admin.")
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+    finally:
+        cursor.close()
+        connection.close()
+
 
 # Register router with FastAPI app
 app.include_router(router_process_image)
