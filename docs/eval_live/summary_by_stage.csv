@@ -1,5 +1,0 @@
-﻿stage_key,n,bleu1_mean,rougeL_mean,bertscore_f1_mean,geval_mean,geval_norm_mean
-problem_exploring_stage1,133,32.1485,0.2721,,3.8451,0.769
-problem_exploring_stage2,116,21.5322,0.2242,,3.8448,0.769
-problem_finding,133,49.2004,0.4605,,3.4842,0.6968
-problem_generating,82,,,,4.4707,0.8941

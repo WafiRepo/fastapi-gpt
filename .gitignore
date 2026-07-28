@@ -151,3 +151,29 @@ Brainstorming*.pdf
 *.docx.pdf
 llama_server_guide*
 *Report*.pdf
+daftar_akun_siswa.pdf
+
+# =============================================================================
+# Log server (di root fastapi-gpt)
+# =============================================================================
+server.log
+server_err.log
+server_out.log
+*.log
+
+# =============================================================================
+# File temp / buffer sementara
+# =============================================================================
+tmp_*.json
+
+# =============================================================================
+# Script seeding / export siswa (data sensitif, bukan bagian router)
+# =============================================================================
+seed_students.py
+seed_students_sa3.py
+export_students_pdf.py
+
+# =============================================================================
+# docs/eval_live — seluruh folder evaluasi live ablation
+# =============================================================================
+docs/eval_live/
