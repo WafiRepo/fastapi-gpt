@@ -81,6 +81,7 @@ export_inquiry_logs_for_eval.py
 generate_and_evaluate.py
 generate_and_evaluate_complete.py
 gen_ablation_problem_finder.py
+gen_ablation_problem_exploring.py
 plot_ablation.py
 plot_eval_results.py
 plot_from_results.py
